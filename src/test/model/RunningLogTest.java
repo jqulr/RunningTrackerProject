@@ -50,6 +50,8 @@ class RunningLogTest {
         //add one entry to feb
         testLog.addEntry(febEntryFirst);
         assertEquals(10, testLog.totalMonthlyDistance(Month.FEB));
+
+
     }
 
     @Test
@@ -64,6 +66,15 @@ class RunningLogTest {
         //only includes entry 6
         assertEquals(40, testLog.totalWeeklyDistance(Month.JAN, 7));
 
+        assertEquals(0, testLog.totalWeeklyDistance(Month.JAN, 16));
+
+    }
+
+    @Test
+    public void testSelectMonth() {
+        assertEquals(testLog.getJan(), testLog.selectMonth(Month.JAN));
+        assertEquals(testLog.getMarch(), testLog.selectMonth(Month.MARCH));
+        assertEquals(testLog.getOctober(), testLog.selectMonth(Month.OCT));
     }
 
     public void addEntries() {

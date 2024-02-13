@@ -311,6 +311,7 @@ public class RunningApp {
         }
 
         Entry entry = findEntry(month, day, year);
+
         if (findStartEnd(month, selectedMonth, entry)) {
 
             List<Entry> selectedWeek = selectedMonth.subList(startFrom, endAt);

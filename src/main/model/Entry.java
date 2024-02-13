@@ -59,7 +59,7 @@ public class Entry {
     }
 
     //EFFECTS: constructs an entry with date, distance, time(in minutes), and average heart rate
-    public Entry(Date date, int distance, int time, int avgHR) {
+    public Entry(Date date, double distance, int time, int avgHR) {
         this.date = date;
         this.distance = distance;
         this.time = time;
@@ -68,7 +68,7 @@ public class Entry {
 
     //EFFECTS: sets the average pace for this entry
     public void setPace() {
-        this.pace = time / distance + " min/km";
+        this.pace = String.format("%.2f", time / distance) + " min/km";
     }
 
     //MODIFIES: this

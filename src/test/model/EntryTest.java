@@ -7,12 +7,14 @@ import static org.junit.jupiter.api.Assertions.*;
 class EntryTest {
 
     private Entry testEntry;
+    private Entry testEntryTwo;
     private Date testDate;
 
     @BeforeEach
     void setUp() {
         testDate = new Date(1, Month.JAN, 2024);
         testEntry = new Entry(testDate, 1, 10, 140);
+        testEntryTwo = new Entry(testDate, 10.8, 60, 140);
     }
 
     @Test
@@ -26,7 +28,9 @@ class EntryTest {
     @Test
     void testSetPace() {
         testEntry.setPace();
-        assertEquals("10.0 min/km", testEntry.getPace());
+        testEntryTwo.setPace();
+        assertEquals("10.00 min/km", testEntry.getPace());
+        assertEquals("5.56 min/km", testEntryTwo.getPace());
     }
 
     @Test
