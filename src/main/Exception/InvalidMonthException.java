@@ -1,4 +1,4 @@
-package Exceptions;
+package Exception;
 
 public class InvalidMonthException extends Exception{
 }

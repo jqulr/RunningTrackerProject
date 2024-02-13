@@ -1,6 +1,6 @@
 package ui;
 
-import Exceptions.*;
+import Exception.*;
 
 import model.Date;
 import model.Entry;
