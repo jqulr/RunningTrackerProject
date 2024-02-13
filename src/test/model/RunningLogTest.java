@@ -2,6 +2,10 @@ package model;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class RunningLogTest {
@@ -16,6 +20,22 @@ class RunningLogTest {
     private Entry janEntryThird;
     private Entry janEntryFourth;
     private Entry febEntryFirst;
+    private Entry marEntry;
+    private Entry aprilEntry;
+    private Entry mayEntry;
+    private Entry juneEntry;
+    private Entry julyEntry;
+    private Entry augustEntry;
+    private Entry septEntry;
+    private Entry octEntry;
+    private Entry novEntry;
+    private Entry decEntry;
+    private List<Month> monthList;
+    private List<Date> dayList;
+    private List<Entry> entryList;
+
+
+
 
     @BeforeEach
     void setUp() {
@@ -30,6 +50,25 @@ class RunningLogTest {
         janEntryThird = new Entry(janDateThird, 20, 20, 150);
         janEntryFourth = new Entry(janDateFourth, 20, 60, 150);
         febEntryFirst = new Entry(febDateFirst, 10, 60, 150);
+
+        monthList = new ArrayList<>();
+        monthList.add(Month.JAN);
+        monthList.add(Month.FEB);
+        monthList.add(Month.MARCH);
+        monthList.add(Month.APRIL);
+        monthList.add(Month.MAY);
+        monthList.add(Month.JUNE);
+        monthList.add(Month.JULY);
+        monthList.add(Month.AUGUST);
+        monthList.add(Month.SEPT);
+        monthList.add(Month.OCT);
+        monthList.add(Month.NOV);
+        monthList.add(Month.DEC);
+
+
+        dayList = new ArrayList<>();
+
+        entryList = new ArrayList<>();
     }
 
     @Test
@@ -73,8 +112,17 @@ class RunningLogTest {
     @Test
     public void testSelectMonth() {
         assertEquals(testLog.getJan(), testLog.selectMonth(Month.JAN));
+        assertEquals(testLog.getFeb(), testLog.selectMonth(Month.FEB));
         assertEquals(testLog.getMarch(), testLog.selectMonth(Month.MARCH));
+        assertEquals(testLog.getApril(), testLog.selectMonth(Month.APRIL));
+        assertEquals(testLog.getMay(), testLog.selectMonth(Month.MAY));
+        assertEquals(testLog.getJune(), testLog.selectMonth(Month.JUNE));
+        assertEquals(testLog.getJuly(), testLog.selectMonth(Month.JULY));
+        assertEquals(testLog.getAugust(), testLog.selectMonth(Month.AUGUST));
+        assertEquals(testLog.getSeptember(), testLog.selectMonth(Month.SEPT));
         assertEquals(testLog.getOctober(), testLog.selectMonth(Month.OCT));
+        assertEquals(testLog.getNovember(), testLog.selectMonth(Month.NOV));
+        assertEquals(testLog.getDecember(), testLog.selectMonth(Month.DEC));
     }
 
     public void addEntries() {
@@ -82,5 +130,32 @@ class RunningLogTest {
         testLog.addEntry(janEntrySecond);
         testLog.addEntry(janEntryThird);
         testLog.addEntry(janEntryFourth);
+
+        for (Entry e : entryList) {
+            testLog.addEntry(e);
+        }
     }
+
+    public void createDates() {
+        for (Month m : monthList) {
+            Date day = new Date(1, m, 2024);
+            dayList.add(day);
+        }
+    }
+
+    public void createEntries() {
+        for (Date d : dayList) {
+            Entry entry = new Entry(d, 10, 60, 150);
+            entryList.add(entry);
+        }
+    }
+
+    @Test
+    public void testDatesAndEntries() {
+        createDates();
+        assertEquals(7, dayList.size());
+        createEntries();
+        assertEquals(7, entryList.size());
+    }
+
 }
