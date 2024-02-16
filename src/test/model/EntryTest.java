@@ -25,6 +25,8 @@ class EntryTest {
         assertEquals(1, testEntry.getDistance());
         assertEquals(10, testEntry.getTime());
         assertEquals(140, testEntry.getHeartRate());
+        assertEquals("Notes: ", testEntry.getNotes());
+
     }
 
     @Test
@@ -44,15 +46,4 @@ class EntryTest {
                                 , testEntry.getNotes());
     }
 
-    @Test
-    void testSetters() {
-        testEntry.setTime(120);
-        assertEquals(120, testEntry.getTime());
-        testEntry.setDistance(15);
-        assertEquals(15, testEntry.getDistance());
-        testEntry.setHeartRate(160);
-        assertEquals(160, testEntry.getHeartRate());
-        testEntry.setDate(testDateTwo);
-        assertEquals(testDateTwo, testEntry.getDate());
-    }
 }

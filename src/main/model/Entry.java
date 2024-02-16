@@ -7,7 +7,7 @@ public class Entry {
     private String pace;
     private int heartRate;
     private Date date;
-    private String notes = "Notes: ";
+    private String notes;
 
     //getters and setters
     public double getDistance() {
@@ -60,10 +60,11 @@ public class Entry {
 
     //EFFECTS: constructs an entry with date, distance, time(in minutes), and average heart rate
     public Entry(Date date, double distance, int time, int avgHR) {
-        this.date = date;
-        this.distance = distance;
-        this.time = time;
-        heartRate = avgHR;
+        this.setDate(date);
+        this.setDistance(distance);
+        this.setTime(time);
+        this.setHeartRate(avgHR);
+        this.setNotes("Notes: ");
     }
 
     //EFFECTS: sets the average pace for this entry

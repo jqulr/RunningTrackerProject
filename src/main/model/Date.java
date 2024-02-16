@@ -7,9 +7,9 @@ public class Date {
 
     //EFFECTS: constructs date with day, month and year
     public Date(int day, Month month, int year) {
-        this.day = day;
-        this.month = month;
-        this.year = year;
+        this.setDay(day);
+        this.setMonth(month);
+        this.setYear(year);
     }
 
     public Month getMonth() {

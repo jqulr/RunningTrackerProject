@@ -60,6 +60,24 @@ class RunningLogTest {
     }
 
     @Test
+    public void testConstructor() {
+        assertEquals(12, testLog.getRunningLog().size());
+
+        assertEquals(testLog.getJan(), testLog.selectMonth(Month.JAN));
+        assertEquals(testLog.getFeb(), testLog.selectMonth(Month.FEB));
+        assertEquals(testLog.getMarch(), testLog.selectMonth(Month.MARCH));
+        assertEquals(testLog.getApril(), testLog.selectMonth(Month.APRIL));
+        assertEquals(testLog.getMay(), testLog.selectMonth(Month.MAY));
+        assertEquals(testLog.getJune(), testLog.selectMonth(Month.JUNE));
+        assertEquals(testLog.getJuly(), testLog.selectMonth(Month.JULY));
+        assertEquals(testLog.getAugust(), testLog.selectMonth(Month.AUGUST));
+        assertEquals(testLog.getSeptember(), testLog.selectMonth(Month.SEPT));
+        assertEquals(testLog.getOctober(), testLog.selectMonth(Month.OCT));
+        assertEquals(testLog.getNovember(), testLog.selectMonth(Month.NOV));
+        assertEquals(testLog.getDecember(), testLog.selectMonth(Month.DEC));
+    }
+
+    @Test
     void testAddEntry() {
         assertEquals(0, testLog.getJan().size());
         addEntries();

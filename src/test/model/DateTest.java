@@ -29,12 +29,5 @@ public class DateTest {
 
     }
 
-    @Test
-    void testSetters() {
-        testDate.setDay(20);
-        testDate.setMonth(Month.JAN);
-        testDate.setYear(2013);
-        assertEquals("20/JAN/2013", testDate.toString());
-    }
 
 }
