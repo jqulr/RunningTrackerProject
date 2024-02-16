@@ -24,24 +24,12 @@ public class RunningLog {
         return runningLog;
     }
 
-    public void setRunningLog(List<List<Entry>> runningLog) {
-        this.runningLog = runningLog;
-    }
-
     public List<Entry> getJan() {
         return january;
     }
 
-    public void setJan(List<Entry> jan) {
-        january = jan;
-    }
-
     public List<Entry> getFeb() {
         return february;
-    }
-
-    public void setFeb(List<Entry> feb) {
-        february = feb;
     }
 
     public List<Entry> getMarch() {

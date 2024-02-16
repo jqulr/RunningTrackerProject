@@ -9,10 +9,12 @@ class EntryTest {
     private Entry testEntry;
     private Entry testEntryTwo;
     private Date testDate;
+    private Date testDateTwo;
 
     @BeforeEach
     void setUp() {
         testDate = new Date(1, Month.JAN, 2024);
+        testDateTwo = new Date(2, Month.JAN, 2024);
         testEntry = new Entry(testDate, 1, 10, 140);
         testEntryTwo = new Entry(testDate, 10.8, 60, 140);
     }
@@ -40,5 +42,17 @@ class EntryTest {
         testEntry.addNotes("warm");
         assertEquals("Notes: " + " sunny day" + " warm"
                                 , testEntry.getNotes());
+    }
+
+    @Test
+    void testSetters() {
+        testEntry.setTime(120);
+        assertEquals(120, testEntry.getTime());
+        testEntry.setDistance(15);
+        assertEquals(15, testEntry.getDistance());
+        testEntry.setHeartRate(160);
+        assertEquals(160, testEntry.getHeartRate());
+        testEntry.setDate(testDateTwo);
+        assertEquals(testDateTwo, testEntry.getDate());
     }
 }

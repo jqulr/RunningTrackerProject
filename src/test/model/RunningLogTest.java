@@ -20,21 +20,9 @@ class RunningLogTest {
     private Entry janEntryThird;
     private Entry janEntryFourth;
     private Entry febEntryFirst;
-    private Entry marEntry;
-    private Entry aprilEntry;
-    private Entry mayEntry;
-    private Entry juneEntry;
-    private Entry julyEntry;
-    private Entry augustEntry;
-    private Entry septEntry;
-    private Entry octEntry;
-    private Entry novEntry;
-    private Entry decEntry;
     private List<Month> monthList;
     private List<Date> dayList;
     private List<Entry> entryList;
-
-
 
 
     @BeforeEach
@@ -111,6 +99,12 @@ class RunningLogTest {
 
     @Test
     public void testSelectMonth() {
+        createDates();
+        createEntries();
+        for (Entry e : entryList) {
+            testLog.addEntry(e);
+        }
+
         assertEquals(testLog.getJan(), testLog.selectMonth(Month.JAN));
         assertEquals(testLog.getFeb(), testLog.selectMonth(Month.FEB));
         assertEquals(testLog.getMarch(), testLog.selectMonth(Month.MARCH));
@@ -125,16 +119,15 @@ class RunningLogTest {
         assertEquals(testLog.getDecember(), testLog.selectMonth(Month.DEC));
     }
 
+    @Test
     public void addEntries() {
         testLog.addEntry(janEntry);
         testLog.addEntry(janEntrySecond);
         testLog.addEntry(janEntryThird);
         testLog.addEntry(janEntryFourth);
 
-        for (Entry e : entryList) {
-            testLog.addEntry(e);
-        }
     }
+
 
     public void createDates() {
         for (Month m : monthList) {
@@ -153,9 +146,9 @@ class RunningLogTest {
     @Test
     public void testDatesAndEntries() {
         createDates();
-        assertEquals(7, dayList.size());
+        assertEquals(12, dayList.size());
         createEntries();
-        assertEquals(7, entryList.size());
+        assertEquals(12, entryList.size());
     }
 
 }
