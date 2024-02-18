@@ -1,5 +1,6 @@
 package model;
 
+import exception.DuplicateEntryException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -93,8 +94,13 @@ class RunningLogTest {
         assertEquals(0, testLog.totalMonthlyDistance(Month.FEB));
 
         //add one entry to feb
-        testLog.addEntry(febEntryFirst);
-        assertEquals(10, testLog.totalMonthlyDistance(Month.FEB));
+        try {
+            testLog.addEntry(febEntryFirst);
+            assertEquals(10, testLog.totalMonthlyDistance(Month.FEB));
+        } catch (DuplicateEntryException dee) {
+            fail();
+        }
+
 
 
     }
@@ -120,7 +126,11 @@ class RunningLogTest {
         createDates();
         createEntries();
         for (Entry e : entryList) {
-            testLog.addEntry(e);
+            try {
+                testLog.addEntry(e);
+            } catch (DuplicateEntryException dee) {
+                fail();
+            }
         }
 
         assertEquals(testLog.getJan(), testLog.selectMonth(Month.JAN));
@@ -139,10 +149,14 @@ class RunningLogTest {
 
     @Test
     public void addEntries() {
-        testLog.addEntry(janEntry);
-        testLog.addEntry(janEntrySecond);
-        testLog.addEntry(janEntryThird);
-        testLog.addEntry(janEntryFourth);
+        try {
+            testLog.addEntry(janEntry);
+            testLog.addEntry(janEntrySecond);
+            testLog.addEntry(janEntryThird);
+            testLog.addEntry(janEntryFourth);
+        } catch (DuplicateEntryException dee) {
+            fail();
+        }
 
     }
 

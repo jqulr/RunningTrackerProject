@@ -37,6 +37,7 @@ public class RunningApp {
     private int heartRate;
     private int startFrom;
     private int endAt;
+    private Date date;
 
     //EFFECTS: launches the running app
     public RunningApp() {
@@ -80,10 +81,6 @@ public class RunningApp {
         switch (selectedOption) {
             case 1:
                 if (handleLogEntry()) {
-                    Date date = createDate(selectedDay, selectedMonth, selectedYear);
-                    Entry newEntry = createEntry(date, distance, time, heartRate);
-                    runningLog.addEntry(newEntry);
-                    newEntry.addNotes(note);
                     System.out.println("New entry has been added!" + "\n");
                 }
                 break;
@@ -126,6 +123,9 @@ public class RunningApp {
 
         try {
             collectInfo();
+            Entry newEntry = new Entry(date, distance, time, heartRate);
+            runningLog.addEntry(newEntry);
+            newEntry.addNotes(note);
             return true;
         } catch (InvalidMonthException ivme) {
             System.out.println("please make sure valid month entry is entered\n"
@@ -135,7 +135,7 @@ public class RunningApp {
             System.out.println("selected day is not in: " + newMonth + "." + selectedYear + "\n");
             return false;
         } catch (DuplicateEntryException dee) {
-            System.out.println("This date is already logged, please enter another date");
+            System.out.println("This date is already logged, please enter another date" + "\n");
             return false;
         } catch (InvalidYearException iye) {
             System.out.println("please make sure valid year entry is entered\n");
@@ -165,8 +165,6 @@ public class RunningApp {
         } catch (InvalidNumberException ive) {
             System.out.println("selected day is not in: " + newMonth + "." + selectedYear + "\n");
             return false;
-        } catch (DuplicateEntryException ignored) {
-            return true;
         }
         return true;
     }
@@ -189,8 +187,7 @@ public class RunningApp {
     }
 
     //EFFECTS: store user's running entry information, such as date, distance, time, heart rate
-    public void collectInfo() throws InvalidMonthException, InvalidNumberException, DuplicateEntryException,
-                                        InvalidYearException {
+    public void collectInfo() throws InvalidMonthException, InvalidNumberException, InvalidYearException {
         System.out.println("Please select one of the following months: ");
         System.out.println("JAN / FEB / MARCH / APRIL / MAY / JUNE / JULY / AUGUST / SEPT / OCT / NOV / DEC");
         selectedMonth = input.next();
@@ -216,6 +213,8 @@ public class RunningApp {
 
         System.out.println("Add note to this entry: ");
         note = input.next();
+
+        date = createDate(selectedDay, selectedMonth, selectedYear);
 
     }
 
@@ -257,14 +256,11 @@ public class RunningApp {
     }
 
     //EFFECTS: return true if date is valid,
-    public boolean verifyDate(Month month, int day, int year) throws InvalidNumberException, DuplicateEntryException {
+    public boolean verifyDate(Month month, int day, int year) throws InvalidNumberException {
         //verifyYear(year);
 
         boolean isLeapYear = year % 4 == 0;
 
-        if (findEntry(month, day, year) != null) {
-            throw new DuplicateEntryException();
-        }
 
         if (thirtyOneDays.contains(month)) {
             if (day <= 0 || day > 31) {

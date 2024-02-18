@@ -1,5 +1,7 @@
 package model;
 
+import exception.DuplicateEntryException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -91,10 +93,16 @@ public class RunningLog {
 
 
     //MODIFIES: this
-    //EFFECTS: adds an entry to the month of corresponding list
+    //EFFECTS: adds an entry to the month of corresponding list, or throw DuplicateEntryException if entry already
+    //         exists
     @SuppressWarnings("methodlength")
-    public void addEntry(Entry entry) {
+    public void addEntry(Entry entry) throws DuplicateEntryException {
         Month month = entry.getMonth();
+
+        if (findEntry(entry, month)) {
+            throw new DuplicateEntryException();
+        }
+
         switch (month) {
             case JAN: {
                 this.getJan().add(entry);
@@ -183,6 +191,23 @@ public class RunningLog {
     public List<Entry> selectMonth(Month month) {
         int monthIndex = month.ordinal();
         return runningLog.get(monthIndex);
+    }
+
+    //EFFECTS: return true if an entry with matching day, month and year is found within the list of entries
+    //         for the selected month
+    public boolean findEntry(Entry entry, Month month) {
+        List<Entry> selectedMonth = this.selectMonth(month);
+
+        int day = entry.getDate().getDay();
+        int year = entry.getDate().getYear();
+
+        for (Entry e : selectedMonth) {
+            if (e.getDate().getDay() == day && e.getDate().getYear() == year) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
 }
