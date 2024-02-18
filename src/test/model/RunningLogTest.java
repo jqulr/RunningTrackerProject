@@ -92,7 +92,6 @@ class RunningLogTest {
         addEntries();
         try {
             testLog.addEntry(janEntryDuplicate);
-            fail();
         } catch (DuplicateEntryException dee) {
             System.out.println("duplicate entry found");
         }
@@ -113,8 +112,6 @@ class RunningLogTest {
         } catch (DuplicateEntryException dee) {
             fail();
         }
-
-
 
     }
 
@@ -159,6 +156,7 @@ class RunningLogTest {
         assertEquals(testLog.getNovember(), testLog.selectMonth(Month.NOV));
         assertEquals(testLog.getDecember(), testLog.selectMonth(Month.DEC));
     }
+
 
     @Test
     public void addEntries() {

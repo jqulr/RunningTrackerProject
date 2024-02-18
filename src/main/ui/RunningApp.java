@@ -212,7 +212,8 @@ public class RunningApp {
         heartRate = input.nextInt();
 
         System.out.println("Add note to this entry: ");
-        note = input.next();
+        input.nextLine();
+        note = input.nextLine();
 
         date = createDate(selectedDay, selectedMonth, selectedYear);
 
