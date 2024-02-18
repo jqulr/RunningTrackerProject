@@ -17,6 +17,7 @@ class RunningLogTest {
     private Date janDateFourth;
     private Date febDateFirst;
     private Entry janEntry;
+    private Entry janEntryDuplicate;
     private Entry janEntrySecond;
     private Entry janEntryThird;
     private Entry janEntryFourth;
@@ -35,6 +36,7 @@ class RunningLogTest {
         janDateFourth = new Date(8,Month.JAN,2024);
         febDateFirst = new Date(10,Month.FEB,2024);
         janEntry = new Entry(janDateOne, 1, 10, 140);
+        janEntryDuplicate = new Entry(janDateOne, 1, 10, 140);
         janEntrySecond = new Entry(janDateTwo, 10, 20, 150);
         janEntryThird = new Entry(janDateThird, 20, 20, 150);
         janEntryFourth = new Entry(janDateFourth, 20, 60, 150);
@@ -83,6 +85,17 @@ class RunningLogTest {
         assertEquals(0, testLog.getJan().size());
         addEntries();
         assertEquals(4, testLog.getJan().size());
+    }
+
+    @Test
+    void testAddDuplicateEntry() {
+        addEntries();
+        try {
+            testLog.addEntry(janEntryDuplicate);
+            fail();
+        } catch (DuplicateEntryException dee) {
+            System.out.println("duplicate entry found");
+        }
     }
 
     @Test
@@ -159,7 +172,6 @@ class RunningLogTest {
         }
 
     }
-
 
     public void createDates() {
         for (Month m : monthList) {

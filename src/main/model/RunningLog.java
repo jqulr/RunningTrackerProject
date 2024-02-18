@@ -195,7 +195,7 @@ public class RunningLog {
 
     //EFFECTS: return true if an entry with matching day, month and year is found within the list of entries
     //         for the selected month
-    public boolean findEntry(Entry entry, Month month) {
+    private boolean findEntry(Entry entry, Month month) {
         List<Entry> selectedMonth = this.selectMonth(month);
 
         int day = entry.getDate().getDay();
