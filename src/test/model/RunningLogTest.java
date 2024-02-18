@@ -12,12 +12,16 @@ import static org.junit.jupiter.api.Assertions.*;
 class RunningLogTest {
     private RunningLog testLog;
     private Date janDateOne;
+    private Date janDateOneDupYear;
+    private Date janDateOneDupDay;
     private Date janDateTwo;
     private Date janDateThird;
     private Date janDateFourth;
     private Date febDateFirst;
     private Entry janEntry;
     private Entry janEntryDuplicate;
+    private Entry janEntryDupYear;
+    private Entry janEntryDupDay;
     private Entry janEntrySecond;
     private Entry janEntryThird;
     private Entry janEntryFourth;
@@ -31,12 +35,18 @@ class RunningLogTest {
     void setUp() {
         testLog = new RunningLog();
         janDateOne = new Date(1,Month.JAN,2024);
+        janDateOneDupYear = new Date(2,Month.JAN,2024);
+        janDateOneDupDay = new Date(1,Month.JAN,2023);
         janDateTwo = new Date(15,Month.JAN,2024);
         janDateThird = new Date(7,Month.JAN,2024);
         janDateFourth = new Date(8,Month.JAN,2024);
         febDateFirst = new Date(10,Month.FEB,2024);
         janEntry = new Entry(janDateOne, 1, 10, 140);
+
         janEntryDuplicate = new Entry(janDateOne, 1, 10, 140);
+        janEntryDupYear = new Entry(janDateOneDupYear, 1, 10, 140);
+        janEntryDupDay = new Entry(janDateOneDupDay, 1, 10, 140);
+
         janEntrySecond = new Entry(janDateTwo, 10, 20, 150);
         janEntryThird = new Entry(janDateThird, 20, 20, 150);
         janEntryFourth = new Entry(janDateFourth, 20, 60, 150);
@@ -90,11 +100,29 @@ class RunningLogTest {
     @Test
     void testAddDuplicateEntry() {
         addEntries();
+
+        // exact match
         try {
             testLog.addEntry(janEntryDuplicate);
         } catch (DuplicateEntryException dee) {
             System.out.println("duplicate entry found");
         }
+
+        // same year different day
+        try {
+            testLog.addEntry(janEntryDupYear);
+        } catch (DuplicateEntryException dee) {
+            fail();
+        }
+
+        // same day different year
+        try {
+            testLog.addEntry(janEntryDupDay);
+        } catch (DuplicateEntryException dee) {
+            fail();
+        }
+
+
     }
 
     @Test
