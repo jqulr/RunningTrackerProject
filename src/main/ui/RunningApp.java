@@ -322,8 +322,8 @@ public class RunningApp {
                 System.out.println("Date: " + e.getDate().toString() + " Distance: " + e.getDistance()
                         + " Time: " + e.getTime() + " Average HR: " + e.getHeartRate()
                         + "\n" + entry.getNotes() + "\n");
-                //System.out.println("Total number of entries for the week of " + month + "." + day + " is: " + entryCount
-                       // + "\n");
+                //System.out.println("Total number of entries for the week of " + month + "." + day + " is: "
+                // + entryCount + "\n");
             }
         }
 
