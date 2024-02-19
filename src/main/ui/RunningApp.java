@@ -76,6 +76,7 @@ public class RunningApp {
     }
 
     @SuppressWarnings("methodlength")
+    //EFFECTS: handles difference input choices
     public void handleInput(int selectedOption) {
 
         switch (selectedOption) {
@@ -144,7 +145,7 @@ public class RunningApp {
 
     }
 
-    //EFFECTS: returns true if input month, day, year are valid entries
+    //EFFECTS: returns true if input month, day, year are valid entries, false if exceptions are caught
     public boolean handleWeeklyInput(String choice) {
         System.out.println("please choose a year: ");
         try {
@@ -186,7 +187,8 @@ public class RunningApp {
         return true;
     }
 
-    //EFFECTS: store user's running entry information, such as date, distance, time, heart rate
+    //EFFECTS: store user's running entry information, such as date, distance, time, heart rate, and throws
+    //         InvalidMonthException, InvalidNumberException, InvalidYearException for invalid entries
     public void collectInfo() throws InvalidMonthException, InvalidNumberException, InvalidYearException {
         System.out.println("Please select one of the following months: ");
         System.out.println("JAN / FEB / MARCH / APRIL / MAY / JUNE / JULY / AUGUST / SEPT / OCT / NOV / DEC");
@@ -256,7 +258,7 @@ public class RunningApp {
         return null;
     }
 
-    //EFFECTS: return true if date is valid,
+    //EFFECTS: return true if date is valid, or throw InvalidNumberException
     public boolean verifyDate(Month month, int day, int year) throws InvalidNumberException {
         //verifyYear(year);
 
@@ -279,7 +281,7 @@ public class RunningApp {
         return true;
     }
 
-    //EFFECTS: throw InvalidMonthException if month is not valid
+    //EFFECTS: verify month entry, or throw InvalidMonthException if month is not valid
     public void verifyMonth(String inputMonth) throws InvalidMonthException {
         List<String> monthInYear = new ArrayList<>(Arrays.asList("jan", "feb", "march", "april", "may", "june",
                                                     "july", "august", "sept", "oct", "nov", "dec"));
@@ -289,7 +291,7 @@ public class RunningApp {
         }
     }
 
-    //EFFECTS: throw InvalidYearException if year is beyond 2024
+    //EFFECTS: verify year entry, or throw InvalidYearException if year is beyond 2024
     public void verifyYear(int inputYear) throws InvalidYearException {
         if (inputYear > 2024) {
             throw new InvalidYearException();
@@ -297,6 +299,7 @@ public class RunningApp {
     }
 
 
+    //REQUIRES: has to start on a day with an entry
     //EFFECTS: show list of weekly entries, 7 days including the starting day
     public void showEntries(Month month, int day, int year) {
         List<Entry> selectedMonth = runningLog.selectMonth(month);
@@ -319,14 +322,14 @@ public class RunningApp {
                 System.out.println("Date: " + e.getDate().toString() + " Distance: " + e.getDistance()
                         + " Time: " + e.getTime() + " Average HR: " + e.getHeartRate()
                         + "\n" + entry.getNotes() + "\n");
-                System.out.println("Total number of entries for the week of " + month + "." + day + " is: " + entryCount
-                        + "\n");
+                //System.out.println("Total number of entries for the week of " + month + "." + day + " is: " + entryCount
+                       // + "\n");
             }
         }
 
     }
 
-    //EFFECTS: show list of monthly entries
+    //EFFECTS: show list of entries within month
     public void showEntries(Month month) {
 
         List<Entry> selectedMonth = runningLog.selectMonth(month);

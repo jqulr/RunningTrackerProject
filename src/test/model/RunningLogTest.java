@@ -11,13 +11,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class RunningLogTest {
     private RunningLog testLog;
-    private Date janDateOne;
-    private Date janDateOneDupYear;
-    private Date janDateOneDupDay;
-    private Date janDateTwo;
-    private Date janDateThird;
-    private Date janDateFourth;
-    private Date febDateFirst;
     private Entry janEntry;
     private Entry janEntryDuplicate;
     private Entry janEntryDupYear;
@@ -34,13 +27,13 @@ class RunningLogTest {
     @BeforeEach
     void setUp() {
         testLog = new RunningLog();
-        janDateOne = new Date(1,Month.JAN,2024);
-        janDateOneDupYear = new Date(2,Month.JAN,2024);
-        janDateOneDupDay = new Date(1,Month.JAN,2023);
-        janDateTwo = new Date(15,Month.JAN,2024);
-        janDateThird = new Date(7,Month.JAN,2024);
-        janDateFourth = new Date(8,Month.JAN,2024);
-        febDateFirst = new Date(10,Month.FEB,2024);
+        Date janDateOne = new Date(1, Month.JAN, 2024);
+        Date janDateOneDupYear = new Date(2, Month.JAN, 2024);
+        Date janDateOneDupDay = new Date(1, Month.JAN, 2023);
+        Date janDateTwo = new Date(15, Month.JAN, 2024);
+        Date janDateThird = new Date(7, Month.JAN, 2024);
+        Date janDateFourth = new Date(8, Month.JAN, 2024);
+        Date febDateFirst = new Date(10, Month.FEB, 2024);
         janEntry = new Entry(janDateOne, 1, 10, 140);
 
         janEntryDuplicate = new Entry(janDateOne, 1, 10, 140);
