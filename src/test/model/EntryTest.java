@@ -25,7 +25,7 @@ class EntryTest {
         assertEquals(1, testEntry.getDistance());
         assertEquals(10, testEntry.getTime());
         assertEquals(140, testEntry.getHeartRate());
-        assertEquals("Notes: ", testEntry.getNotes());
+        assertEquals("", testEntry.getNotes());
 
     }
 
@@ -40,9 +40,9 @@ class EntryTest {
     @Test
     void testAddNotes() {
         testEntry.addNotes("sunny day");
-        assertEquals("Notes: " + " sunny day", testEntry.getNotes());
+        assertEquals(" / sunny day", testEntry.getNotes());
         testEntry.addNotes("warm");
-        assertEquals("Notes: " + " sunny day" + " warm"
+        assertEquals(" / sunny day" + " / warm"
                                 , testEntry.getNotes());
     }
 

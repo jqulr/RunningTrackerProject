@@ -1,5 +1,8 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 // Represents an entry with date, running distance, time, and heart rate
 public class Entry {
     private double distance;
@@ -64,7 +67,8 @@ public class Entry {
         this.setDistance(distance);
         this.setTime(time);
         this.setHeartRate(avgHR);
-        this.setNotes("Notes: ");
+        this.setNotes("");
+        this.setPace();
     }
 
     //EFFECTS: sets the average pace for this entry
@@ -75,8 +79,24 @@ public class Entry {
     //MODIFIES: this
     //EFFECTS: adds a note to this entry
     public void addNotes(String note) {
-        this.notes += " " + note;
+        this.notes += " / " + note;
     }
+
+    // EFFECTS: creates a json object for an entry
+    public JSONObject toJson() {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("Pace", getPace());
+        jsonObject.put("Date", getDate().toJson());
+        jsonObject.put("Distance", getDistance());
+        jsonObject.put("Time", getTime());
+        jsonObject.put("Average HR", getHeartRate());
+        jsonObject.put("Notes", getNotes());
+
+        return jsonObject;
+    }
+
+
+
 
 
 

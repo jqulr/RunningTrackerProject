@@ -1,6 +1,8 @@
 package model;
 
 import exception.DuplicateEntryException;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -208,6 +210,27 @@ public class RunningLog {
         }
 
         return false;
+    }
+
+
+    // EFFECTS: creates a json object of a list of entries
+    public JSONObject toJson() {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("Running Entries", entriesToJson());
+        return jsonObject;
+    }
+
+    // EFFECTS: creates an array of entry json objects
+    public JSONArray entriesToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (List<Entry> entrylist : runningLog) {
+            for (Entry e : entrylist) {
+                jsonArray.put(e.toJson());
+            }
+        }
+
+        return jsonArray;
     }
 
 }

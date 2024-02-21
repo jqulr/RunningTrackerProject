@@ -1,5 +1,7 @@
 package model;
 
+import org.json.JSONObject;
+
 public class Date {
     private Month month;
     private int day;
@@ -44,4 +46,16 @@ public class Date {
             return + this.getDay() + "/" + this.getMonth().toString() + "/" + this.getYear();
         }
     }
+
+    // EFFECTS: converts date into a json object
+    public JSONObject toJson() {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("Day", getDay());
+        jsonObject.put("Month", getMonth());
+        jsonObject.put("Year", getYear());
+
+        return jsonObject;
+    }
+
+
 }

@@ -6,7 +6,12 @@ import model.Date;
 import model.Entry;
 import model.Month;
 import model.RunningLog;
+import org.json.JSONObject;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -38,6 +43,11 @@ public class RunningApp {
     private int startFrom;
     private int endAt;
     private Date date;
+
+    JsonWriter jsonWriter = new JsonWriter(JSON_STORE);
+    JsonReader jsonReader = new JsonReader(JSON_STORE);
+
+    private static final String JSON_STORE = "./data/runningLog.json";
 
     //EFFECTS: launches the running app
     public RunningApp() {
@@ -73,10 +83,17 @@ public class RunningApp {
         System.out.println("2) View a list of running entries");
         System.out.println("3) View monthly running distance");
         System.out.println("4) View weekly running distance");
+        System.out.println("5) Save entries to file");
+        System.out.println("6) Load entries to file");
     }
 
     @SuppressWarnings("methodlength")
     //EFFECTS: handles difference input choices
+    //         1 - add a new entry
+    //         2 - choose to view weekly or monthly entries
+    //         3 - view total distance in a selected month
+    //         4 - view total distance in a selected week
+    //TODO: handle save and load methods
     public void handleInput(int selectedOption) {
 
         switch (selectedOption) {
@@ -113,6 +130,11 @@ public class RunningApp {
                     distance = runningLog.totalWeeklyDistance(newMonth, choiceDay);
                     displayWeeklyDistanceInfo(distance, newMonth, choiceDay);
                 }
+            case 5:
+                saveRunningLog();
+                break;
+            case 6:
+                loadRunningLog();
                 break;
 
         }
@@ -321,10 +343,10 @@ public class RunningApp {
                 entryCount++;
                 System.out.println("Date: " + e.getDate().toString() + " Distance: " + e.getDistance()
                         + " Time: " + e.getTime() + " Average HR: " + e.getHeartRate()
-                        + "\n" + entry.getNotes() + "\n");
-                //System.out.println("Total number of entries for the week of " + month + "." + day + " is: "
-                // + entryCount + "\n");
+                        + "\n" + e.getNotes() + "\n");
             }
+            System.out.println("Total number of entries for the week of " + month + "." + day + " is: "
+                                + entryCount + "\n");
         }
 
     }
@@ -388,6 +410,29 @@ public class RunningApp {
     public void displayWeeklyDistanceInfo(int distance, Month month, int day) {
         System.out.println("You total running distance for the week of "
                              + day + "/" + month + " is: " + distance + " km" + "\n");
+    }
+
+    //EFFECTS: saves all entries to file
+    private void saveRunningLog() {
+        try {
+            jsonWriter.openWriter();
+            jsonWriter.write(runningLog);
+            jsonWriter.close();
+            System.out.println("Running log saved to: " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: "+ JSON_STORE);
+        }
+    }
+
+    //MODIFIES: this
+    //EFFECTS: loads all entries from file
+    private void loadRunningLog() {
+        try {
+            runningLog = jsonReader.read();
+            System.out.println("Running log loaded from: " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
     }
 
 }
