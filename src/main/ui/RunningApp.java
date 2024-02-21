@@ -93,7 +93,6 @@ public class RunningApp {
     //         2 - choose to view weekly or monthly entries
     //         3 - view total distance in a selected month
     //         4 - view total distance in a selected week
-    //TODO: handle save and load methods
     public void handleInput(int selectedOption) {
 
         switch (selectedOption) {
@@ -420,7 +419,7 @@ public class RunningApp {
             jsonWriter.close();
             System.out.println("Running log saved to: " + JSON_STORE);
         } catch (FileNotFoundException e) {
-            System.out.println("Unable to write to file: "+ JSON_STORE);
+            System.out.println("Unable to write to file: " + JSON_STORE);
         }
     }
 

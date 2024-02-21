@@ -57,7 +57,7 @@ public class JsonReader {
     // MODIFIES: rl
     // EFFECTS: parse json representation of entry, adds entry to running log and return it
     public RunningLog parseEntry(RunningLog rl, JSONObject entry) {
-        Date date = fromJson( (JSONObject) entry.get("Date"));
+        Date date = fromJson((JSONObject) entry.get("Date"));
         int distance = (int) entry.get("Distance");
         int time = (int) entry.get("Time");
         String pace = (String) entry.get("Pace");
@@ -69,7 +69,7 @@ public class JsonReader {
         try {
             rl.addEntry(newEntry);
         } catch (DuplicateEntryException ignored) {
-
+            System.out.println("");
         }
 
         return rl;
