@@ -1,6 +1,5 @@
 package model;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 // Represents an entry with date, running distance, time, and heart rate
@@ -61,7 +60,8 @@ public class Entry {
         this.notes = notes;
     }
 
-    //EFFECTS: constructs an entry with date, distance, time(in minutes), and average heart rate
+    //EFFECTS: constructs an entry with date, distance, time(in minutes), average heart rate, empty notes, and
+    //         sets the pace
     public Entry(Date date, double distance, int time, int avgHR) {
         this.setDate(date);
         this.setDistance(distance);

@@ -19,3 +19,5 @@ running progress and be able to set different goals during training.
 - As a user, I want to view a list of my runs at the end of the week or month.
 - As a user, I want to be able to see my weekly and monthly total running distance.
 - As a user, I want to be able to add notes, for example about the weather, to my entries.
+- As a user, I want to be able to save all my entries to file.
+- As a user, I want to be able to load all my entries from file.
