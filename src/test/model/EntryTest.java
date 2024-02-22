@@ -40,9 +40,9 @@ class EntryTest {
     @Test
     void testAddNotes() {
         testEntry.addNotes("sunny day");
-        assertEquals(" / sunny day", testEntry.getNotes());
+        assertEquals(" - sunny day", testEntry.getNotes());
         testEntry.addNotes("warm");
-        assertEquals(" / sunny day" + " / warm"
+        assertEquals(" - sunny day" + " - warm"
                                 , testEntry.getNotes());
     }
 

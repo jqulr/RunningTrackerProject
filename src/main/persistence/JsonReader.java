@@ -26,19 +26,9 @@ public class JsonReader {
     // MODIFIES: rl
     // EFFECTS: reads and returns a list of entries (runninglog), throws IOException if error occurs
     public RunningLog read() throws IOException {
-        String s;
-        StringBuilder content = new StringBuilder();
-
-        // read the source file and store in string
-        BufferedReader bf = new BufferedReader(new FileReader(source));
-        while ((s = bf.readLine()) != null) {
-            content.append(s);
-        }
-
-        String data = content.toString();
 
         // use json object to store string data
-        JSONObject jsonObject = new JSONObject(data);
+        JSONObject jsonObject = new JSONObject(readSourceFile(source));
 
         // creates a running log to store all entries
         RunningLog rl = new RunningLog();
@@ -49,9 +39,20 @@ public class JsonReader {
             JSONObject entry = (JSONObject) json;
             parseEntry(rl, entry);
         }
-
         return rl;
+    }
 
+    // EFFECTS: reads source file and return content in a string, throws IOException if error occurs
+    public String readSourceFile(String source) throws IOException {
+        String s;
+        StringBuilder content = new StringBuilder();
+
+        BufferedReader bf = new BufferedReader(new FileReader(source));
+        while ((s = bf.readLine()) != null) {
+            content.append(s);
+        }
+
+        return content.toString();
     }
 
     // MODIFIES: rl
@@ -69,8 +70,8 @@ public class JsonReader {
 
         try {
             rl.addEntry(newEntry);
-        } catch (DuplicateEntryException ignored) {
-            System.out.println("");
+        } catch (DuplicateEntryException e) {
+            System.out.println("Duplicate entry not expected here");
         }
 
         return rl;

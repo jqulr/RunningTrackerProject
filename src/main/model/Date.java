@@ -1,8 +1,10 @@
 package model;
 
 import org.json.JSONObject;
+import persistence.Writable;
 
-public class Date {
+// a Date class that represents dates with day, month, year
+public class Date implements Writable {
     private Month month;
     private int day;
     private int year;
@@ -14,6 +16,7 @@ public class Date {
         this.setYear(year);
     }
 
+    // getters and setters
     public Month getMonth() {
         return month;
     }
@@ -38,7 +41,7 @@ public class Date {
         this.year = year;
     }
 
-    //EFFECTS: returns a representation of the date
+    //EFFECTS: returns a string representation of the date
     public String toString() {
         if (this.getDay() < 10) {
             return "0" + this.getDay() + "/" + this.getMonth().toString() + "/" + this.getYear();
@@ -47,7 +50,7 @@ public class Date {
         }
     }
 
-    // EFFECTS: converts date into a json object
+    // EFFECTS: creates json object of date
     public JSONObject toJson() {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("Day", getDay());

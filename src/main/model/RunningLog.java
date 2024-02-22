@@ -3,12 +3,13 @@ package model;
 import exception.DuplicateEntryException;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import persistence.Writable;
 
 import java.util.ArrayList;
 import java.util.List;
 
 // represents a collection of all the entries over 12 months
-public class RunningLog {
+public class RunningLog implements Writable {
     private List<List<Entry>> runningLog;
     private List<Entry> january = new ArrayList<>();
     private List<Entry> february = new ArrayList<>();
@@ -213,6 +214,7 @@ public class RunningLog {
     }
 
 
+    @Override
     // EFFECTS: creates a json object of a list of entries
     public JSONObject toJson() {
         JSONObject jsonObject = new JSONObject();
@@ -229,7 +231,6 @@ public class RunningLog {
                 jsonArray.put(e.toJson());
             }
         }
-
         return jsonArray;
     }
 

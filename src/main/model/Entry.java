@@ -1,9 +1,10 @@
 package model;
 
 import org.json.JSONObject;
+import persistence.Writable;
 
 // Represents an entry with date, running distance, time, and heart rate
-public class Entry {
+public class Entry implements Writable {
     private double distance;
     private int time;
     private String pace;
@@ -71,7 +72,7 @@ public class Entry {
         this.setPace();
     }
 
-    //EFFECTS: sets the average pace for this entry
+    //EFFECTS: sets the average pace of time / distance in min/km for an entry
     public void setPace() {
         this.pace = String.format("%.2f", time / distance) + " min/km";
     }
@@ -79,9 +80,10 @@ public class Entry {
     //MODIFIES: this
     //EFFECTS: adds a note to this entry
     public void addNotes(String note) {
-        this.notes += " / " + note;
+        this.notes += " - " + note;
     }
 
+    @Override
     // EFFECTS: creates a json object for an entry
     public JSONObject toJson() {
         JSONObject jsonObject = new JSONObject();
@@ -94,10 +96,5 @@ public class Entry {
 
         return jsonObject;
     }
-
-
-
-
-
 
 }
