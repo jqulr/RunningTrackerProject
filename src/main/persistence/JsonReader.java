@@ -60,11 +60,12 @@ public class JsonReader {
         Date date = fromJson((JSONObject) entry.get("Date"));
         int distance = (int) entry.get("Distance");
         int time = (int) entry.get("Time");
-        String pace = (String) entry.get("Pace");
+        //String pace = (String) entry.get("Pace");
         int avgHR = (int) entry.get("Average HR");
-        String notes = entry.getString("");
+        String notes = entry.getString("Notes");
 
         Entry newEntry = new Entry(date, distance, time, avgHR);
+        newEntry.setNotes(notes);
 
         try {
             rl.addEntry(newEntry);
