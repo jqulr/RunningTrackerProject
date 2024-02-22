@@ -57,30 +57,26 @@ public class Entry implements Writable {
         return notes;
     }
 
-    public void setNotes(String notes) {
-        this.notes = notes;
-    }
-
-    //EFFECTS: constructs an entry with date, distance, time(in minutes), average heart rate, empty notes, and
+    // EFFECTS: constructs an entry with date, distance, time(in minutes), average heart rate, empty notes, and
     //         sets the pace
     public Entry(Date date, double distance, int time, int avgHR) {
         this.setDate(date);
         this.setDistance(distance);
         this.setTime(time);
         this.setHeartRate(avgHR);
-        this.setNotes("");
+        this.addNotes("");
         this.setPace();
     }
 
-    //EFFECTS: sets the average pace of time / distance in min/km for an entry
+    // EFFECTS: sets the average pace of time / distance in min/km for an entry
     public void setPace() {
         this.pace = String.format("%.2f", time / distance) + " min/km";
     }
 
-    //MODIFIES: this
-    //EFFECTS: adds a note to this entry
+    // MODIFIES: this
+    // EFFECTS: adds a note to this entry
     public void addNotes(String note) {
-        this.notes += " - " + note;
+        this.notes = " " + note;
     }
 
     @Override

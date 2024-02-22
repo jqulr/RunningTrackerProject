@@ -77,7 +77,7 @@ public class RunningLog implements Writable {
         return december;
     }
 
-    //EFFECTS: constructs the running log with all months
+    // EFFECTS: constructs the running log with all months
     public RunningLog() {
         runningLog = new ArrayList<>();
         runningLog.add(january);
@@ -95,8 +95,8 @@ public class RunningLog implements Writable {
     }
 
 
-    //MODIFIES: this
-    //EFFECTS: adds an entry to the month of corresponding list, or throw DuplicateEntryException if entry already
+    // MODIFIES: this
+    // EFFECTS: adds an entry to the month of corresponding list, or throw DuplicateEntryException if entry already
     //         exists
     @SuppressWarnings("methodlength")
     public void addEntry(Entry entry) throws DuplicateEntryException {
@@ -159,7 +159,7 @@ public class RunningLog implements Writable {
     }
 
 
-    //EFFECTS: return the total distance ran within the month
+    // EFFECTS: return the total distance ran within the month
     public int totalMonthlyDistance(Month month) {
         int totalDistance = 0;
 
@@ -172,7 +172,7 @@ public class RunningLog implements Writable {
         return totalDistance;
     }
 
-    //EFFECTS: return the total distance ran in 7 days, including the specified date
+    // EFFECTS: return the total distance ran in 7 days, including the specified date
     public int totalWeeklyDistance(Month month, int day) {
 
         int totalDistance = 0;
@@ -190,13 +190,13 @@ public class RunningLog implements Writable {
 
     }
 
-    //EFFECTS: return the list of entries corresponding to the input month
+    // EFFECTS: return the list of entries corresponding to the input month
     public List<Entry> selectMonth(Month month) {
         int monthIndex = month.ordinal();
         return runningLog.get(monthIndex);
     }
 
-    //EFFECTS: return true if an entry with matching day, month and year is found within the list of entries
+    // EFFECTS: return true if an entry with matching day, month and year is found within the list of entries
     //         for the selected month
     private boolean findEntry(Entry entry, Month month) {
         List<Entry> selectedMonth = this.selectMonth(month);

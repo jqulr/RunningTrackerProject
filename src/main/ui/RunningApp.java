@@ -49,13 +49,13 @@ public class RunningApp {
 
     private static final String JSON_STORE = "./data/runningLog.json";
 
-    //EFFECTS: launches the running app
+    // EFFECTS: launches the running app
     public RunningApp() {
         runningLog = new RunningLog();
         runApp();
     }
 
-    //EFFECTS: display and handle different options
+    // EFFECTS: display and handle different options
     public void runApp() {
         while (onGoing) {
 
@@ -77,7 +77,7 @@ public class RunningApp {
 
     }
 
-    //EFFECTS: display the list of options to choose from
+    // EFFECTS: display the list of options to choose from
     public void displayOptions() {
         System.out.println("1) Add a running entry");
         System.out.println("2) View a list of running entries");
@@ -88,11 +88,13 @@ public class RunningApp {
     }
 
     @SuppressWarnings("methodlength")
-    //EFFECTS: handles difference input choices
+    // EFFECTS: handles difference input choices
     //         1 - add a new entry
     //         2 - choose to view weekly or monthly entries
     //         3 - view total distance in a selected month
     //         4 - view total distance in a selected week
+    //         5 - save all entries
+    //         6 - load all entries
     public void handleInput(int selectedOption) {
 
         switch (selectedOption) {
@@ -140,7 +142,8 @@ public class RunningApp {
 
     }
 
-    //EFFECTS: returns true if info verifies to be all correct, false if catches exceptions are thrown
+    // EFFECTS: returns true if info verifies to be all correct, false if InvalidMonthException, InvalidNumberException,
+    //          DuplicateEntryException, or InvalidYearException is thrown
     public boolean handleLogEntry() {
 
         try {
@@ -222,8 +225,7 @@ public class RunningApp {
         System.out.println("Please enter the year: ");
         verifyYear(selectedYear = input.nextInt());
 
-        findMonth(selectedMonth);
-        verifyDate(newMonth, selectedDay, selectedYear);
+        verifyDate(findMonth(selectedMonth), selectedDay, selectedYear);
 
         System.out.println("Please enter distance ran (km): ");
         distance = input.nextInt();
@@ -238,21 +240,16 @@ public class RunningApp {
         input.nextLine();
         note = input.nextLine();
 
-        date = createDate(selectedDay, selectedMonth, selectedYear);
+        date = createDate(selectedDay, newMonth, selectedYear);
 
-    }
-
-    //EFFECTS: creates an entry based on user input
-    public Entry createEntry(Date date, int distance, int time, int hr) {
-        return new Entry(date, distance, time, hr);
     }
 
     //EFFECTS: create a date
-    public Date createDate(int day, String month, int year) {
-        return new Date(day, newMonth, year);
+    public Date createDate(int day, Month month, int year) {
+        return new Date(day, month, year);
     }
 
-    //EFFECTS: returns the Month corresponding to the input month
+    // EFFECTS: returns the Month corresponding to the input month
     public Month findMonth(String month) {
         //reset month to null, otherwise if month not found, return value is the previously set value
         newMonth = null;
@@ -265,8 +262,8 @@ public class RunningApp {
         return  newMonth;
     }
 
-    //REQUIRES: day and year are valid numbers
-    //EFFECTS: return entry with matching month, day and year
+    // REQUIRES: day and year are valid numbers
+    // EFFECTS: return entry with matching month, day and year
     public Entry findEntry(Month month, int day, int year) {
         List<Entry> selectedMonth = runningLog.selectMonth(month);
 
@@ -279,12 +276,11 @@ public class RunningApp {
         return null;
     }
 
-    //EFFECTS: return true if date is valid, or throw InvalidNumberException
+    // EFFECTS: return true if date is valid, or throw InvalidNumberException if day is not contained in the month
     public boolean verifyDate(Month month, int day, int year) throws InvalidNumberException {
         //verifyYear(year);
 
         boolean isLeapYear = year % 4 == 0;
-
 
         if (thirtyOneDays.contains(month)) {
             if (day <= 0 || day > 31) {
@@ -302,7 +298,7 @@ public class RunningApp {
         return true;
     }
 
-    //EFFECTS: verify month entry, or throw InvalidMonthException if month is not valid
+    // EFFECTS: verify month entry, or throw InvalidMonthException if month is not valid
     public void verifyMonth(String inputMonth) throws InvalidMonthException {
         List<String> monthInYear = new ArrayList<>(Arrays.asList("jan", "feb", "march", "april", "may", "june",
                                                     "july", "august", "sept", "oct", "nov", "dec"));
@@ -312,7 +308,7 @@ public class RunningApp {
         }
     }
 
-    //EFFECTS: verify year entry, or throw InvalidYearException if year is beyond 2024
+    // EFFECTS: verify year entry, or throw InvalidYearException if year is beyond 2024
     public void verifyYear(int inputYear) throws InvalidYearException {
         if (inputYear > 2024) {
             throw new InvalidYearException();
@@ -320,8 +316,8 @@ public class RunningApp {
     }
 
 
-    //REQUIRES: has to start on a day with an entry
-    //EFFECTS: show list of weekly entries, 7 days including the starting day
+    // REQUIRES: has to start on a day with an entry
+    // EFFECTS: show list of weekly entries, 7 days including the starting day
     public void showEntries(Month month, int day, int year) {
         List<Entry> selectedMonth = runningLog.selectMonth(month);
 
@@ -350,7 +346,7 @@ public class RunningApp {
 
     }
 
-    //EFFECTS: show list of entries within month
+    // EFFECTS: show list of entries within month
     public void showEntries(Month month) {
 
         List<Entry> selectedMonth = runningLog.selectMonth(month);
@@ -368,8 +364,8 @@ public class RunningApp {
         }
     }
 
-    //EFFECTS: return true if successfully sets the start and end indexes to create a weekly sublist from
-    //         the list of entries for the month
+    // EFFECTS: return true if successfully sets the start and end indexes to create a weekly sublist from
+    //          the list of entries for the month
     public boolean findStartEnd(Month month, List<Entry> selectedMonth, Entry entry) {
 
         if (entry != null) {
@@ -385,7 +381,7 @@ public class RunningApp {
         return true;
     }
 
-    //EFFECTS: check whether feb date is valid in year, throw InvalidNumberException if date is absent in given year
+    // EFFECTS: check whether feb date is valid in year, throw InvalidNumberException if date is absent in given year
     public void checkFebInLeapYear(Month month, int day, boolean isLeapYear) throws InvalidNumberException {
 
         if (month == Month.FEB) {
@@ -399,19 +395,19 @@ public class RunningApp {
         }
     }
 
-    //EFFECTS: show monthly distance information
+    // EFFECTS: show monthly distance information
     public void displayMonthlyDistanceInfo(int distance, Month month) {
         System.out.println("You total running distance for the month of "
                             + month + " is: " + distance + " km" + "\n");
     }
 
-    //EFFECTS: show weekly distance information
+    // EFFECTS: show weekly distance information
     public void displayWeeklyDistanceInfo(int distance, Month month, int day) {
         System.out.println("You total running distance for the week of "
                              + day + "/" + month + " is: " + distance + " km" + "\n");
     }
 
-    //EFFECTS: saves all entries to file
+    // EFFECTS: saves all entries to file
     private void saveRunningLog() {
         try {
             jsonWriter.openWriter();
@@ -423,8 +419,8 @@ public class RunningApp {
         }
     }
 
-    //MODIFIES: this
-    //EFFECTS: loads all entries from file
+    // MODIFIES: this
+    // EFFECTS: loads all entries from file
     private void loadRunningLog() {
         try {
             runningLog = jsonReader.read();

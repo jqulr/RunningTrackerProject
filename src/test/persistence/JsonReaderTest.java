@@ -54,7 +54,7 @@ public class JsonReaderTest {
             assertEquals(60, runningLog.getJan().get(0).getTime());
             assertEquals(150, runningLog.getJan().get(0).getHeartRate());
             assertEquals("6.00 min/km", runningLog.getJan().get(0).getPace());
-            assertEquals(" - good weather", runningLog.getJan().get(0).getNotes());
+            assertEquals("  good weather", runningLog.getJan().get(0).getNotes());
 
             assertEquals(10, runningLog.totalMonthlyDistance(JAN));
 

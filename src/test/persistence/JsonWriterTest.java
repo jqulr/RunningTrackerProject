@@ -62,8 +62,7 @@ public class JsonWriterTest {
     public void testJanEntryAddedWriter() {
         jsonWriter = new JsonWriter("./data/JanEntryAddedTest.json");
 
-        Date date = new Date(10, Month.JAN, 2024);
-        Entry entry = new Entry(date, 10, 60, 150);
+        Entry entry = createEntry(10, JAN, 2024, 10, 60, 150);
         entry.addNotes("good weather");
         RunningLog runningLog = new RunningLog();
         try {
@@ -80,7 +79,7 @@ public class JsonWriterTest {
             assertEquals(60, runningLog.getJan().get(0).getTime());
             assertEquals(150, runningLog.getJan().get(0).getHeartRate());
             assertEquals("6.00 min/km", runningLog.getJan().get(0).getPace());
-            assertEquals(" - good weather", runningLog.getJan().get(0).getNotes());
+            assertEquals("  good weather", runningLog.getJan().get(0).getNotes());
             assertEquals(10, runningLog.totalMonthlyDistance(JAN));
 
             assertTrue(runningLog.getFeb().isEmpty());
@@ -91,5 +90,72 @@ public class JsonWriterTest {
         } catch (IOException e) {
             fail("IOException not expected");
         }
+    }
+
+    @Test
+    public void testMultipleEntriesDiffMonth() {
+        RunningLog runningLog = addToMayAugNovEntries();
+        jsonWriter = new JsonWriter("./data/MayAugMovEntriesAddedTest.json");
+
+        try {
+            jsonWriter.openWriter();
+            jsonWriter.write(runningLog);
+            jsonWriter.close();
+
+            jsonReader = new JsonReader("./data/MayAugMovEntriesAddedTest.json");
+            runningLog = jsonReader.read();
+
+            // check size of list for each month
+            assertEquals(1, runningLog.getMay().size());
+            assertEquals(2, runningLog.getAugust().size());
+            assertEquals(1, runningLog.getNovember().size());
+
+            // check dates
+            assertEquals("10/MAY/2024", runningLog.getMay().get(0).getDate().toString());
+            assertEquals("10/AUGUST/2024", runningLog.getAugust().get(0).getDate().toString());
+            assertEquals("11/AUGUST/2024", runningLog.getAugust().get(1).getDate().toString());
+            assertEquals("10/NOV/2024", runningLog.getNovember().get(0).getDate().toString());
+
+            // total aug distance, monthly and weekly
+            assertEquals(25, runningLog.totalWeeklyDistance(Month.AUGUST, 10));
+            assertEquals(25, runningLog.totalMonthlyDistance(Month.AUGUST));
+
+        } catch (FileNotFoundException fne) {
+            fail("FileNotFoundException not expected");
+        } catch (IOException e) {
+            fail("IOException not expected");
+        }
+    }
+
+    // EFFECTS: adding one entry for may, two for aug and one for nov into running log, and returns the log
+    public RunningLog addToMayAugNovEntries() {
+        RunningLog runningLog = new RunningLog();
+
+        Entry MayEntry = createEntry(10,Month.MAY, 2024,10,60,150);
+        Entry AugEntry = createEntry(10,Month.AUGUST, 2024,10,60,150);
+        Entry AugEntry2 = createEntry(11,Month.AUGUST, 2024,15,60,150);
+        Entry NovEntry = createEntry(10,Month.NOV, 2024,10,60,150);
+
+        try {
+            runningLog.addEntry(MayEntry);
+            runningLog.addEntry(AugEntry);
+            runningLog.addEntry(AugEntry2);
+            runningLog.addEntry(NovEntry);
+
+        } catch (DuplicateEntryException dee) {
+            fail("shouldn't have any duplicated entries");
+        }
+
+        return runningLog;
+
+    }
+
+    // EFFECTS: creates and returns an entry with specified information
+    public Entry createEntry(int day, Month month, int year, double distance, int time, int avgHR) {
+        Date Date = new Date(day, month, year);
+        Entry Entry = new Entry(Date, distance, time, avgHR);
+        Entry.addNotes(month + " :)");
+
+        return Entry;
     }
 }

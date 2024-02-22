@@ -66,7 +66,7 @@ public class JsonReader {
         String notes = entry.getString("Notes");
 
         Entry newEntry = new Entry(date, distance, time, avgHR);
-        newEntry.setNotes(notes);
+        newEntry.addNotes(notes);
 
         try {
             rl.addEntry(newEntry);
