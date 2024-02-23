@@ -300,10 +300,16 @@ public class RunningApp {
 
     // EFFECTS: verify month entry, or throw InvalidMonthException if month is not valid
     public void verifyMonth(String inputMonth) throws InvalidMonthException {
-        List<String> monthInYear = new ArrayList<>(Arrays.asList("jan", "feb", "march", "april", "may", "june",
-                                                    "july", "august", "sept", "oct", "nov", "dec"));
+//        List<String> monthInYear = new ArrayList<>(Arrays.asList("jan", "feb", "march", "april", "may", "june",
+//                                                    "july", "august", "sept", "oct", "nov", "dec"));
 
-        if (!monthInYear.contains(inputMonth)) {
+//        if (!monthInYear.contains(inputMonth)) {
+//            throw new InvalidMonthException();
+//        }
+
+        try {
+            Month.valueOf(inputMonth);
+        } catch (IllegalArgumentException iae) {
             throw new InvalidMonthException();
         }
     }

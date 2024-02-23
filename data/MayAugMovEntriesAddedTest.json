@@ -1,0 +1,50 @@
+{"Running Entries": [
+    {
+        "Average HR": 150,
+        "Pace": "6.00 min/km",
+        "Time": 60,
+        "Date": {
+            "Month": "MAY",
+            "Year": 2024,
+            "Day": 10
+        },
+        "Distance": 10,
+        "Notes": " MAY :)"
+    },
+    {
+        "Average HR": 150,
+        "Pace": "6.00 min/km",
+        "Time": 60,
+        "Date": {
+            "Month": "AUGUST",
+            "Year": 2024,
+            "Day": 10
+        },
+        "Distance": 10,
+        "Notes": " AUGUST :)"
+    },
+    {
+        "Average HR": 150,
+        "Pace": "4.00 min/km",
+        "Time": 60,
+        "Date": {
+            "Month": "AUGUST",
+            "Year": 2024,
+            "Day": 11
+        },
+        "Distance": 15,
+        "Notes": " AUGUST :)"
+    },
+    {
+        "Average HR": 150,
+        "Pace": "6.00 min/km",
+        "Time": 60,
+        "Date": {
+            "Month": "NOV",
+            "Year": 2024,
+            "Day": 10
+        },
+        "Distance": 10,
+        "Notes": " NOV :)"
+    }
+]}
