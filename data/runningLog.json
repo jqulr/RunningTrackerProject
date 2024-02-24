@@ -1,1 +1,12 @@
-{"Running Entries": []}
+{"Running Entries": [{
+    "Average HR": 150,
+    "Pace": "6.00 min/km",
+    "Time": 60,
+    "Date": {
+        "Month": "JAN",
+        "Year": 2024,
+        "Day": 10
+    },
+    "Distance": 10,
+    "Notes": " fine"
+}]}

@@ -41,6 +41,7 @@ public class Date implements Writable {
         this.year = year;
     }
 
+    @Override
     //EFFECTS: returns a string representation of the date
     public String toString() {
         if (this.getDay() < 10) {

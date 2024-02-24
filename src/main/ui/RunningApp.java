@@ -251,15 +251,19 @@ public class RunningApp {
 
     // EFFECTS: returns the Month corresponding to the input month
     public Month findMonth(String month) {
-        //reset month to null, otherwise if month not found, return value is the previously set value
-        newMonth = null;
-        for (Month m : Month.values()) {
-            if (m.toString().equals(month.toUpperCase())) {
-                newMonth = m;
-                break;
-            }
-        }
+        // reset month to null, otherwise if month not found, return value is the previously set value
+        // newMonth = null;
+//        for (Month m : Month.values()) {
+//            if (m.toString().equals(month.toUpperCase())) {
+//                newMonth = m;
+//                break;
+//            }
+//        }
+
+        // since verifyMonth already checks input, just set newMonth to the Month enum
+        newMonth = Month.valueOf(month);
         return  newMonth;
+
     }
 
     // REQUIRES: day and year are valid numbers
@@ -342,7 +346,7 @@ public class RunningApp {
             int entryCount = 0;
             for (Entry e : selectedWeek) {
                 entryCount++;
-                System.out.println("Date: " + e.getDate().toString() + " Distance: " + e.getDistance()
+                System.out.println("Date: " + e.getDate() + " Distance: " + e.getDistance()
                         + " Time: " + e.getTime() + " Average HR: " + e.getHeartRate()
                         + "\n" + e.getNotes() + "\n");
             }
@@ -364,7 +368,7 @@ public class RunningApp {
         }
 
         for (Entry entry : selectedMonth) {
-            System.out.println("Date: " + entry.getDate().toString() + " Distance: " + entry.getDistance()
+            System.out.println("Date: " + entry.getDate() + " Distance: " + entry.getDistance()
                                 + " Time: " + entry.getTime() + " Average HR: " + entry.getHeartRate()
                                 + "\n" + entry.getNotes() + "\n");
         }
