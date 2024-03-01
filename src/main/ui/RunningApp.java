@@ -6,7 +6,6 @@ import model.Date;
 import model.Entry;
 import model.Month;
 import model.RunningLog;
-import org.json.JSONObject;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
@@ -178,7 +177,7 @@ public class RunningApp {
             System.out.println("please make sure valid year entry is entered\n");
             return false;
         }
-        System.out.println("please choose a month: ");
+        System.out.println("please choose a month (in all uppercase): ");
         try {
             verifyMonth(choiceMonth = input.next());
             System.out.println("please choose a day in the month: ");
@@ -196,7 +195,7 @@ public class RunningApp {
 
     //EFFECTS: returns true if month is valid entry, false if either entry is not a valid month
     public boolean handleMonthlyInput() {
-        System.out.println("please choose a month: ");
+        System.out.println("please choose a month (in all uppercase): ");
         choiceMonth = input.next();
 
         try {
@@ -423,7 +422,7 @@ public class RunningApp {
             jsonWriter.openWriter();
             jsonWriter.write(runningLog);
             jsonWriter.close();
-            System.out.println("Running log saved to: " + JSON_STORE);
+            System.out.println("\n" + "Running log saved to: " + JSON_STORE);
         } catch (FileNotFoundException e) {
             System.out.println("Unable to write to file: " + JSON_STORE);
         }
@@ -434,7 +433,7 @@ public class RunningApp {
     private void loadRunningLog() {
         try {
             runningLog = jsonReader.read();
-            System.out.println("Running log loaded from: " + JSON_STORE);
+            System.out.println("\n" + " Running log loaded from: " + JSON_STORE);
         } catch (IOException e) {
             System.out.println("Unable to read from file: " + JSON_STORE);
         }

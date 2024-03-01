@@ -8,7 +8,6 @@ import model.Month;
 import model.RunningLog;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import ui.RunningApp;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
