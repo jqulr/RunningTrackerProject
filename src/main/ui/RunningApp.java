@@ -422,7 +422,7 @@ public class RunningApp {
             jsonWriter.openWriter();
             jsonWriter.write(runningLog);
             jsonWriter.close();
-            System.out.println("\n" + "Running log saved to: " + JSON_STORE);
+            System.out.println("Running log saved to: " + JSON_STORE + "\n");
         } catch (FileNotFoundException e) {
             System.out.println("Unable to write to file: " + JSON_STORE);
         }
@@ -433,7 +433,7 @@ public class RunningApp {
     private void loadRunningLog() {
         try {
             runningLog = jsonReader.read();
-            System.out.println("\n" + " Running log loaded from: " + JSON_STORE);
+            System.out.println(" Running log loaded from: " + JSON_STORE + "\n");
         } catch (IOException e) {
             System.out.println("Unable to read from file: " + JSON_STORE);
         }
