@@ -99,12 +99,12 @@ public class RunningLog implements Writable {
     // EFFECTS: adds an entry to the month of corresponding list, or throw DuplicateEntryException if entry already
     //         exists
     @SuppressWarnings("methodlength")
-    public void addEntry(Entry entry) throws DuplicateEntryException {
+    public void addEntry(Entry entry) {
         Month month = entry.getMonth();
 
-        if (findEntry(entry, month)) {
-            throw new DuplicateEntryException();
-        }
+//        if (findEntry(entry, month)) {
+//            throw new DuplicateEntryException();
+//        }
 
         switch (month) {
             case JAN: {

@@ -67,11 +67,13 @@ public class JsonReader {
         Entry newEntry = new Entry(date, distance, time, avgHR);
         newEntry.addNotes(notes);
 
-        try {
-            rl.addEntry(newEntry);
-        } catch (DuplicateEntryException e) {
-            System.out.println("Duplicate entry not expected here");
-        }
+        rl.addEntry(newEntry);
+
+//        try {
+//
+//        } catch (DuplicateEntryException e) {
+//            System.out.println("Duplicate entry not expected here");
+//        }
 
         return rl;
 

@@ -1,4 +1,6 @@
 package ui;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -6,11 +8,17 @@ import com.toedter.calendar.JDateChooser;
 import model.Date;
 import model.Entry;
 import model.Month;
+import model.RunningLog;
+import persistence.JsonReader;
+import persistence.JsonWriter;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class EntryPane extends JFrame {
+public class EntryPane {
     private JFrame entryFrame;
     private JPanel panel;
     private JLabel timeLabel;
@@ -23,9 +31,17 @@ public class EntryPane extends JFrame {
     private JTextField hrText;
     private JTextField notesText;
     private JButton buttonAdd;
+    private String saveStatusMessage;
 
-    private List<Entry> allEntries;
-    private Entry newEntry;
+    private RunningLog runningLog = new RunningLog();
+
+    JsonWriter jsonWriter = new JsonWriter(JSON_STORE);
+    private static final String JSON_STORE = "./data/runningLog.json";
+
+
+
+   // private List<Entry> allEntries;
+   // private Entry newEntry;
 
     //private EntryOperations entryOperations;
 
@@ -51,9 +67,10 @@ public class EntryPane extends JFrame {
         return ((JTextField) dateChooser.getDateEditor().getUiComponent()).getText();
     }
 
-    public EntryPane() {
+    public EntryPane(RunningLog log) {
+        //super(runningLog);
 
-        allEntries = new ArrayList<>();
+        //allEntries = new ArrayList<>();
 
         panel = new JPanel();
         GridLayout gl = new GridLayout(6, 2);
@@ -70,10 +87,14 @@ public class EntryPane extends JFrame {
         hrText = new JTextField(10);
         notesText = new JTextField(10);
 
-        buttonAdd = new JButton("Add");
+        buttonAdd = new JButton("Save Entry");
         buttonAdd.addActionListener(actionEvent -> {
-            allEntries.add(createNewEntry());
-            JOptionPane.showConfirmDialog(null, entryToString(newEntry),
+            Entry newEntry = createNewEntry();
+            newEntry.addNotes(notesText.getText());
+            log.addEntry(newEntry);
+            //System.out.println(log.getJan().size());
+            saveRunningLog(log);
+            JOptionPane.showConfirmDialog(null, saveStatusMessage,
                     "Confirming entry", JOptionPane.PLAIN_MESSAGE);
         });
 
@@ -94,7 +115,7 @@ public class EntryPane extends JFrame {
 
         entryFrame = new JFrame("Adding a new running entry...");
         entryFrame.setContentPane(panel);
-        entryFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        entryFrame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         entryFrame.setSize(400, 450);
         entryFrame.setVisible(true);
 
@@ -106,10 +127,10 @@ public class EntryPane extends JFrame {
         double distance = Double.parseDouble(getDistanceText().getText());
         int heartRate = Integer.parseInt(getHrText().getText());
 
-        newEntry = new Entry(date, distance, time, heartRate);
-        newEntry.addNotes(getNotesText().getText());
+        //newEntry = new Entry(date, distance, time, heartRate);
+        //newEntry.addNotes(getNotesText().getText());
 
-        return newEntry;
+        return new Entry(date, distance, time, heartRate);
 
     }
 
@@ -139,5 +160,18 @@ public class EntryPane extends JFrame {
         return new Date(day, selectedMonth, year);
 
     }
+
+    // EFFECTS: saves all entries to file
+    private void saveRunningLog(RunningLog log) {
+        try {
+            jsonWriter.openWriter();
+            jsonWriter.write(log);
+            jsonWriter.close();
+            saveStatusMessage = "Running log saved to: " + JSON_STORE + "\n";
+        } catch (FileNotFoundException e) {
+            saveStatusMessage = "Unable to write to file: " + JSON_STORE;
+        }
+    }
+
 
 }
