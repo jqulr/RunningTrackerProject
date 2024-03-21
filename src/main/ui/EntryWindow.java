@@ -27,8 +27,6 @@ public class EntryWindow {
     private JButton buttonAdd;
     private String saveStatusMessage;
 
-    private RunningLog runningLog = new RunningLog();
-
     JsonWriter jsonWriter = new JsonWriter(JSON_STORE);
     private static final String JSON_STORE = "./data/runningLog.json";
 
@@ -84,9 +82,8 @@ public class EntryWindow {
             Entry newEntry = createNewEntry();
             newEntry.addNotes(notesText.getText());
             log.addEntry(newEntry);
-            saveRunningLog(log);
             entryFrame.dispose();
-            JOptionPane.showConfirmDialog(null, saveStatusMessage,
+            JOptionPane.showConfirmDialog(null, "Entry added successfully!",
                     "Saving Entry...", JOptionPane.PLAIN_MESSAGE);
         });
 
@@ -118,16 +115,6 @@ public class EntryWindow {
 
     }
 
-    public String entryToString(Entry entry) {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(" Date: " + entry.getDate() + "\n"
-                + " Distance: " + entry.getDistance() + "\n"
-                + " Time: " + entry.getTime() + "\n"
-                + " Average HR: " + entry.getHeartRate() + "\n"
-                + " Notes: " + entry.getNotes() + "\n");
-
-        return stringBuilder.toString();
-    }
 
     // EFFECTS: returns a Date representation of the date selected from the Calendar
     public Date parseJDateChooser() {
@@ -143,18 +130,6 @@ public class EntryWindow {
 
         return new Date(day, selectedMonth, year);
 
-    }
-
-    // EFFECTS: saves all entries to file
-    private void saveRunningLog(RunningLog log) {
-        try {
-            jsonWriter.openWriter();
-            jsonWriter.write(log);
-            jsonWriter.close();
-            saveStatusMessage = "Entry saved successfully! \n";
-        } catch (FileNotFoundException e) {
-            saveStatusMessage = "Unable to write to file: " + JSON_STORE;
-        }
     }
 
 

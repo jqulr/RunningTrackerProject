@@ -21,3 +21,16 @@ running progress and be able to set different goals during training.
 - As a user, I want to be able to add notes, for example about the weather, to my entries.
 - As a user, I want to be able to save all my entries to file.
 - As a user, I want to be able to load all my entries from file.
+
+**Instructions for Grader**
+
+- You can generate the first required action related to the user story "adding multiple Xs to a Y" by
+  clicking the button labelled "Add Entry" to add a new running entry to the current list.
+- You can generate the second required action related to the user story "adding multiple Xs to a Y" by
+  selecting a month from the drop-down list, then click "display entries".
+- You can locate my visual component by clicking the "view progress" button to
+  view a current summary of the monthly total distance represented by a line chart.
+- You can save the state of my application by clicking the "SaveAll" button to save the current state of the
+  application to file 
+- You can reload the state of my application by clicking the "load entries" button to 
+  load the state of the application from file

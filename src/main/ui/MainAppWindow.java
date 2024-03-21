@@ -5,11 +5,13 @@ import model.Entry;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.io.FileNotFoundException;
 import java.util.List;
 
 import model.Month;
 import model.RunningLog;
 import persistence.JsonReader;
+import persistence.JsonWriter;
 
 import java.io.IOException;
 
@@ -30,6 +32,7 @@ public class MainAppWindow {
     private JButton buttonProgress;
     private JButton buttonShowAllEntries;
     private JButton refresh;
+    private JButton buttonSaveAll;
     private JComboBox monthSelection;
     private JLabel labelAllEntry;
     private JLabel selectionLabel;
@@ -37,12 +40,13 @@ public class MainAppWindow {
     private JScrollPane scrollPane;
     private Month month;
     private String loadStatusMessage;
+    private String saveStatusMessage;
 
     //private StringBuilder stringBuilder = new StringBuilder();
 
 
     JsonReader jsonReader = new JsonReader(JSON_STORE);
-
+    JsonWriter jsonWriter = new JsonWriter(JSON_STORE);
     private static final String JSON_STORE = "./data/runningLog.json";
 
     public RunningLog getRunningLog() {
@@ -73,9 +77,9 @@ public class MainAppWindow {
 
         // setting layout manager for different panels
         BorderLayout bl = new BorderLayout();
-        GridLayout glNorth = new GridLayout(4,1);
+        GridLayout glNorth = new GridLayout(3,1);
         BorderLayout scrollPaneGl = new BorderLayout();
-        GridLayout glSouth = new GridLayout(5, 1);
+        GridLayout glSouth = new GridLayout(6, 1);
         windowContent.setLayout(bl);
         northPanel.setLayout(glNorth);
         centerPanel.setLayout(scrollPaneGl);
@@ -83,11 +87,12 @@ public class MainAppWindow {
 
         initializeLoadButton();
         initializeShowAllEntriesButton();
-        initializeRefreshButton();
+        //initializeRefreshButton();
         initializeDisplayButton();
         initializeMonthSelectionBox();
         initializeProgressButton();
         initializeEntryButton();
+        initializeButtonSaveAll();
 
         // create and place displayfield and Jlabel
         displayField = new JTextArea(100, 100);
@@ -100,7 +105,7 @@ public class MainAppWindow {
 
         northPanel.add(buttonLoad);
         northPanel.add(buttonShowAllEntries);
-        northPanel.add(refresh);
+        //northPanel.add(refresh);
         northPanel.add(labelAllEntry);
         centerPanel.add(scrollPane);
         southPanel.add(selectionLabel);
@@ -108,6 +113,7 @@ public class MainAppWindow {
         southPanel.add(buttonDisplay);
         southPanel.add(buttonProgress);
         southPanel.add(buttonAddEntry);
+        southPanel.add(buttonSaveAll);
 
         windowContent.add(northPanel, BorderLayout.NORTH);
         windowContent.add(scrollPane, BorderLayout.CENTER);
@@ -115,29 +121,40 @@ public class MainAppWindow {
         frame = new JFrame("Running Log");
         windowContent.setBorder(new EmptyBorder(13, 13, 13, 13));
         frame.setContentPane(windowContent);
-        frame.setSize(new Dimension(500, 500));
+        frame.setSize(new Dimension(650, 650));
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
-    // TODO: MODIFIES: this?
-    // EFFECTS: refreshes the current display window to include any newly added entries
-    private void initializeRefreshButton() {
-        refresh = new JButton();
-        ImageIcon refreshIcon = new ImageIcon("refresh.png");
-        Image resizeRefreshIcon = refreshIcon.getImage().getScaledInstance(20,20, Image.SCALE_SMOOTH);
-        refresh.setIcon(new ImageIcon(resizeRefreshIcon));
-        refresh.addActionListener(actionEvent -> {
-            StringBuilder stringBuilder = new StringBuilder();
-            for (List<Entry> list : runningLog.getRunningLog()) {
-                for (Entry e : list) {
-                    entryToString(e, stringBuilder);
-                }
-            }
-            displayField.setText(stringBuilder.toString());
-            displayField.setCaretPosition(0);
+    private void initializeButtonSaveAll() {
+        buttonSaveAll= new JButton("SaveAll");
+        buttonSaveAll.setPreferredSize(new Dimension(80, 40));
+        buttonSaveAll.addActionListener(actionEvent -> {
+            saveRunningLog(runningLog);
+            JOptionPane.showConfirmDialog(null, saveStatusMessage,
+                    "Saving Entry...", JOptionPane.PLAIN_MESSAGE);
         });
     }
+
+    // TODO: MODIFIES: this?
+//    // EFFECTS: refreshes the current display window to include any newly added entries
+//    private void initializeRefreshButton() {
+//        refresh = new JButton();
+//        ImageIcon refreshIcon = new ImageIcon("refresh.png");
+//        Image resizeRefreshIcon = refreshIcon.getImage().getScaledInstance(20,20, Image.SCALE_SMOOTH);
+//        refresh.setIcon(new ImageIcon(resizeRefreshIcon));
+//        refresh.setPreferredSize(new Dimension(40, 40));
+//        refresh.addActionListener(actionEvent -> {
+//            StringBuilder stringBuilder = new StringBuilder();
+//            for (List<Entry> list : runningLog.getRunningLog()) {
+//                for (Entry e : list) {
+//                    entryToString(e, stringBuilder);
+//                }
+//            }
+//            displayField.setText(stringBuilder.toString());
+//            displayField.setCaretPosition(0);
+//        });
+//    }
 
     // MODIFIES: this
     // EFFECTS: constructs a drop-down box for all the months and sets the month to the selected month
@@ -145,6 +162,7 @@ public class MainAppWindow {
         String[] months = {"...",
                 "JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"};
         monthSelection = new JComboBox(months);
+        monthSelection.setPreferredSize(new Dimension(80, 40));
         monthSelection.addActionListener(actionEvent -> {
             JComboBox selectedMonth = (JComboBox) actionEvent.getSource();
             String monthString = (String) selectedMonth.getSelectedItem();
@@ -155,6 +173,8 @@ public class MainAppWindow {
     // EFFECTS: constructs a button to display all the entries within the selected month when clicked
     private void initializeDisplayButton() {
         buttonDisplay = new JButton("Display Entries");
+        buttonDisplay.setPreferredSize(new Dimension(80, 40));
+
         buttonDisplay.addActionListener(actionEvent -> {
             displayField.setText("");
             StringBuilder stringBuilder = new StringBuilder();
@@ -175,6 +195,11 @@ public class MainAppWindow {
     //          displays all entries in currently in the list when clicked
     private void initializeShowAllEntriesButton() {
         buttonShowAllEntries = new JButton("View Current Entries");
+        ImageIcon refreshIcon = new ImageIcon("refresh.png");
+        Image resizeRefreshIcon = refreshIcon.getImage().getScaledInstance(20,20, Image.SCALE_SMOOTH);
+        buttonShowAllEntries.setIcon(new ImageIcon(resizeRefreshIcon));
+        buttonShowAllEntries.setPreferredSize(new Dimension(80, 40));
+        buttonShowAllEntries.setFont(buttonShowAllEntries.getFont().deriveFont(Font.PLAIN, 30));
         buttonShowAllEntries.addActionListener(actionEvent -> {
             displayField.setText("");
             StringBuilder stringBuilder = new StringBuilder();
@@ -203,6 +228,7 @@ public class MainAppWindow {
     //          distance
     private void initializeProgressButton() {
         buttonProgress = new JButton("View Current Progress");
+        buttonProgress.setPreferredSize(new Dimension(80, 40));
         buttonProgress.addActionListener(actionEvent -> {
             new LineChartWindow("Summary of Monthly Total Distance", runningLog);
         });
@@ -215,7 +241,8 @@ public class MainAppWindow {
         Image resizeAddEntryIcon = addEntryIcon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
         buttonAddEntry = new JButton("Add Entry");
         buttonAddEntry.setIcon(new ImageIcon(resizeAddEntryIcon));
-        buttonAddEntry.setPreferredSize(new Dimension(80, 30));
+        buttonAddEntry.setPreferredSize(new Dimension(80, 40));
+        buttonAddEntry.setFont(buttonLoad.getFont());
         buttonAddEntry.addActionListener(actionEvent -> {
             new EntryWindow(runningLog);
         });
@@ -225,8 +252,9 @@ public class MainAppWindow {
     //          displays a window to show all entries loaded if file was loaded successfully
     private void initializeLoadButton() {
         ImageIcon runIcon = new ImageIcon("running.png");
-        Image resizedImage = runIcon.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+        Image resizedImage = runIcon.getImage().getScaledInstance(60, 60, Image.SCALE_SMOOTH);
         buttonLoad = new JButton("Load All Entries");
+        buttonLoad.setPreferredSize(new Dimension(80, 40));
         buttonLoad.setFocusable(true);
         buttonLoad.addActionListener(actionEvent -> {
             loadRunningLog();
@@ -235,6 +263,18 @@ public class MainAppWindow {
         });
     }
 
+
+    // EFFECTS: saves all entries to file
+    private void saveRunningLog(RunningLog log) {
+        try {
+            jsonWriter.openWriter();
+            jsonWriter.write(log);
+            jsonWriter.close();
+            saveStatusMessage = "Current state saved successfully! \n";
+        } catch (FileNotFoundException e) {
+            saveStatusMessage = "Unable to write to file: " + JSON_STORE;
+        }
+    }
 
     // MODIFIES: this
     // EFFECTS: loads all entries from file
