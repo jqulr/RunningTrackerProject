@@ -1,6 +1,5 @@
 package model;
 
-import exception.DuplicateEntryException;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import persistence.Writable;
@@ -115,11 +114,11 @@ public class RunningLog implements Writable {
                 this.getFeb().add(entry);
                 break;
             }
-            case MARCH: {
+            case MAR: {
                 this.getMarch().add(entry);
                 break;
             }
-            case APRIL: {
+            case APR: {
                 this.getApril().add(entry);
                 break;
             }
@@ -127,19 +126,19 @@ public class RunningLog implements Writable {
                 this.getMay().add(entry);
                 break;
             }
-            case JUNE: {
+            case JUN: {
                 this.getJune().add(entry);
                 break;
             }
-            case JULY: {
+            case JUL: {
                 this.getJuly().add(entry);
                 break;
             }
-            case AUGUST: {
+            case AUG: {
                 this.getAugust().add(entry);
                 break;
             }
-            case SEPT: {
+            case SEP: {
                 this.getSeptember().add(entry);
                 break;
             }

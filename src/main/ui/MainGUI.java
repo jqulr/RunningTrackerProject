@@ -1,23 +1,15 @@
 package ui;
 import java.awt.EventQueue;
-import javax.swing.JFrame;
-import com.toedter.calendar.JDateChooser;
 
-public class Demo {
+// Main class to launch the application
+public class MainGUI {
 
-
-        private JFrame frame;
-        private App app;
-
-        /**
-         * Launch the application.
-         */
+// launch the application
         public static void main(String[] args) {
             EventQueue.invokeLater(new Runnable() {
                 public void run() {
                     try {
-                        App app = new App();
-                        //app.frame.setVisible(true);
+                        MainAppWindow app = new MainAppWindow();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

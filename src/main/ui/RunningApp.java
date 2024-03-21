@@ -19,9 +19,9 @@ import java.util.Scanner;
 //running log application
 public class RunningApp {
 
-    List<Month> thirtyOneDays = new ArrayList<>(Arrays.asList(Month.JAN, Month.MARCH,Month.MAY,
-                                Month.JULY, Month.AUGUST, Month.OCT, Month.DEC));
-    List<Month> thirtyDays = new ArrayList<>(Arrays.asList(Month.APRIL, Month.JUNE,Month.SEPT, Month.NOV));
+    List<Month> thirtyOneDays = new ArrayList<>(Arrays.asList(Month.JAN, Month.MAR,Month.MAY,
+                                Month.JUL, Month.AUG, Month.OCT, Month.DEC));
+    List<Month> thirtyDays = new ArrayList<>(Arrays.asList(Month.APR, Month.JUN,Month.SEP, Month.NOV));
 
     private Scanner input = new Scanner(System.in);
     private RunningLog runningLog;

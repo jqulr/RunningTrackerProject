@@ -1,24 +1,18 @@
 package ui;
+
 import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 import com.toedter.calendar.JDateChooser;
 import model.Date;
 import model.Entry;
 import model.Month;
 import model.RunningLog;
-import persistence.JsonReader;
 import persistence.JsonWriter;
-
-import java.io.FileNotFoundException;
-import java.io.IOException;
-
 import javax.swing.*;
 import java.awt.*;
 
-public class EntryPane {
+// representation of the window displayed when user wants to add an entry to the existing list
+public class EntryWindow {
     private JFrame entryFrame;
     private JPanel panel;
     private JLabel timeLabel;
@@ -38,12 +32,6 @@ public class EntryPane {
     JsonWriter jsonWriter = new JsonWriter(JSON_STORE);
     private static final String JSON_STORE = "./data/runningLog.json";
 
-
-
-   // private List<Entry> allEntries;
-   // private Entry newEntry;
-
-    //private EntryOperations entryOperations;
 
     private JDateChooser dateChooser;
 
@@ -67,14 +55,18 @@ public class EntryPane {
         return ((JTextField) dateChooser.getDateEditor().getUiComponent()).getText();
     }
 
-    public EntryPane(RunningLog log) {
-        //super(runningLog);
-
-        //allEntries = new ArrayList<>();
+    // EFFECTS: constructs the frame to display date selection field and text areas to enter
+    //          time, distance, heart rate, and notes information about the entry
+    public EntryWindow(RunningLog log) {
 
         panel = new JPanel();
         GridLayout gl = new GridLayout(6, 2);
         panel.setLayout(gl);
+
+        entryFrame = new JFrame("Adding a new running entry...");
+        entryFrame.setContentPane(panel);
+        entryFrame.setSize(400, 450);
+        entryFrame.setVisible(true);
 
         dateLabel = new JLabel("Date:");
         timeLabel = new JLabel("Time:");
@@ -92,10 +84,10 @@ public class EntryPane {
             Entry newEntry = createNewEntry();
             newEntry.addNotes(notesText.getText());
             log.addEntry(newEntry);
-            //System.out.println(log.getJan().size());
             saveRunningLog(log);
+            entryFrame.dispose();
             JOptionPane.showConfirmDialog(null, saveStatusMessage,
-                    "Confirming entry", JOptionPane.PLAIN_MESSAGE);
+                    "Saving Entry...", JOptionPane.PLAIN_MESSAGE);
         });
 
         dateChooser = new JDateChooser();
@@ -113,22 +105,14 @@ public class EntryPane {
         panel.add(notesText);
         panel.add(buttonAdd);
 
-        entryFrame = new JFrame("Adding a new running entry...");
-        entryFrame.setContentPane(panel);
-        entryFrame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        entryFrame.setSize(400, 450);
-        entryFrame.setVisible(true);
-
     }
 
+    // EFFECTS: instantiates and returns a new entry based on entry information entered by the user
     public Entry createNewEntry() {
         Date date = parseJDateChooser();
         int time = Integer.parseInt(getTimeText().getText());
         double distance = Double.parseDouble(getDistanceText().getText());
         int heartRate = Integer.parseInt(getHrText().getText());
-
-        //newEntry = new Entry(date, distance, time, heartRate);
-        //newEntry.addNotes(getNotesText().getText());
 
         return new Entry(date, distance, time, heartRate);
 
@@ -145,11 +129,11 @@ public class EntryPane {
         return stringBuilder.toString();
     }
 
+    // EFFECTS: returns a Date representation of the date selected from the Calendar
     public Date parseJDateChooser() {
         String date = getDateString();
         String month = date.substring(0,3).toUpperCase();
         Month selectedMonth = Month.valueOf(month);
-        //int day = dateChooser.getDate();
 
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(dateChooser.getDate());
@@ -167,7 +151,7 @@ public class EntryPane {
             jsonWriter.openWriter();
             jsonWriter.write(log);
             jsonWriter.close();
-            saveStatusMessage = "Running log saved to: " + JSON_STORE + "\n";
+            saveStatusMessage = "Entry saved successfully! \n";
         } catch (FileNotFoundException e) {
             saveStatusMessage = "Unable to write to file: " + JSON_STORE;
         }

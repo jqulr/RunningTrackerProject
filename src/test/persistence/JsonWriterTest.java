@@ -5,7 +5,6 @@ import model.Date;
 import model.Entry;
 import model.Month;
 import model.RunningLog;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.FileNotFoundException;
@@ -117,8 +116,8 @@ public class JsonWriterTest {
             assertEquals("10/NOV/2024", runningLog.getNovember().get(0).getDate().toString());
 
             // total aug distance, monthly and weekly
-            assertEquals(25, runningLog.totalWeeklyDistance(Month.AUGUST, 10));
-            assertEquals(25, runningLog.totalMonthlyDistance(Month.AUGUST));
+            assertEquals(25, runningLog.totalWeeklyDistance(Month.AUG, 10));
+            assertEquals(25, runningLog.totalMonthlyDistance(Month.AUG));
 
         } catch (FileNotFoundException fne) {
             fail("FileNotFoundException not expected");
@@ -132,8 +131,8 @@ public class JsonWriterTest {
         RunningLog runningLog = new RunningLog();
 
         Entry MayEntry = createEntry(10,Month.MAY, 2024,10,60,150);
-        Entry AugEntry = createEntry(10,Month.AUGUST, 2024,10,60,150);
-        Entry AugEntry2 = createEntry(11,Month.AUGUST, 2024,15,60,150);
+        Entry AugEntry = createEntry(10,Month.AUG, 2024,10,60,150);
+        Entry AugEntry2 = createEntry(11,Month.AUG, 2024,15,60,150);
         Entry NovEntry = createEntry(10,Month.NOV, 2024,10,60,150);
 
         try {
