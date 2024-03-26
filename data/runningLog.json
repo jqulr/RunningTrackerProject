@@ -1,98 +1,12 @@
-{"Running Entries": [
-    {
-        "Average HR": 5,
-        "Pace": "1.00 min/km",
-        "Time": 5,
-        "Date": {
-            "Month": "FEB",
-            "Year": 2024,
-            "Day": 4
-        },
-        "Distance": 5,
-        "Notes": "  5"
+{"Running Entries": [{
+    "Average HR": 1,
+    "Pace": "1.00 min/km",
+    "Time": 1,
+    "Date": {
+        "Month": "MAR",
+        "Year": 2024,
+        "Day": 6
     },
-    {
-        "Average HR": 1,
-        "Pace": "1.00 min/km",
-        "Time": 1,
-        "Date": {
-            "Month": "MAR",
-            "Year": 2024,
-            "Day": 6
-        },
-        "Distance": 1,
-        "Notes": "    1"
-    },
-    {
-        "Average HR": 3,
-        "Pace": "1.00 min/km",
-        "Time": 3,
-        "Date": {
-            "Month": "MAR",
-            "Year": 2024,
-            "Day": 15
-        },
-        "Distance": 3,
-        "Notes": "   3"
-    },
-    {
-        "Average HR": 7,
-        "Pace": "1.00 min/km",
-        "Time": 7,
-        "Date": {
-            "Month": "MAR",
-            "Year": 2024,
-            "Day": 14
-        },
-        "Distance": 7,
-        "Notes": " 7"
-    },
-    {
-        "Average HR": 2,
-        "Pace": "1.00 min/km",
-        "Time": 2,
-        "Date": {
-            "Month": "MAR",
-            "Year": 2024,
-            "Day": 27
-        },
-        "Distance": 2,
-        "Notes": " 2"
-    },
-    {
-        "Average HR": 4,
-        "Pace": "1.00 min/km",
-        "Time": 4,
-        "Date": {
-            "Month": "APR",
-            "Year": 2024,
-            "Day": 9
-        },
-        "Distance": 4,
-        "Notes": "   4"
-    },
-    {
-        "Average HR": 5,
-        "Pace": "1.00 min/km",
-        "Time": 5,
-        "Date": {
-            "Month": "JUN",
-            "Year": 2024,
-            "Day": 4
-        },
-        "Distance": 5,
-        "Notes": "     5"
-    },
-    {
-        "Average HR": 7,
-        "Pace": "1.00 min/km",
-        "Time": 7,
-        "Date": {
-            "Month": "AUG",
-            "Year": 2024,
-            "Day": 20
-        },
-        "Distance": 7,
-        "Notes": "  7"
-    }
-]}
+    "Distance": 1,
+    "Notes": " 1"
+}]}

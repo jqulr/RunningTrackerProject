@@ -63,9 +63,6 @@ public class MainAppWindow {
         initialize();
     }
 
-    @SuppressWarnings("methodlength")
-    //TODO: ASK suppress warning//
-
     // EFFECTS: sets the layout of the frame and initializes buttons in the frame
     private void initialize() {
 
@@ -85,39 +82,30 @@ public class MainAppWindow {
         centerPanel.setLayout(scrollPaneGl);
         southPanel.setLayout(glSouth);
 
-        initializeLoadButton();
-        initializeShowAllEntriesButton();
-        //initializeRefreshButton();
-        initializeDisplayButton();
-        initializeMonthSelectionBox();
-        initializeProgressButton();
-        initializeEntryButton();
-        initializeButtonSaveAll();
+
+        initializeAllButtons();
 
         // create and place displayfield and Jlabel
+        initializeMainDisplayField();
+        labelAllEntry = new JLabel("Running Entries: ");
+        selectionLabel = new JLabel("Please select a month to view running entries: ");
+
+        addAllButtonstoPanels();
+        addPanelstoWindow();
+        setMainFrame();
+    }
+
+    // EFFECTS: sets up the main display field as a scrollable panel
+    private void initializeMainDisplayField() {
         displayField = new JTextArea(100, 100);
         displayField.setEditable(false);
         scrollPane = new JScrollPane(displayField);
         scrollPane.setPreferredSize(new Dimension(100,100));
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-        labelAllEntry = new JLabel("Running Entries: ");
-        selectionLabel = new JLabel("Please select a month to view running entries: ");
+    }
 
-        northPanel.add(buttonLoad);
-        northPanel.add(buttonShowAllEntries);
-        //northPanel.add(refresh);
-        northPanel.add(labelAllEntry);
-        centerPanel.add(scrollPane);
-        southPanel.add(selectionLabel);
-        southPanel.add(monthSelection);
-        southPanel.add(buttonDisplay);
-        southPanel.add(buttonProgress);
-        southPanel.add(buttonAddEntry);
-        southPanel.add(buttonSaveAll);
-
-        windowContent.add(northPanel, BorderLayout.NORTH);
-        windowContent.add(scrollPane, BorderLayout.CENTER);
-        windowContent.add(southPanel, BorderLayout.SOUTH);
+    // EFFECTS: sets up the main "Running Log" frame with a panel and a set dimension of 650x650
+    private void setMainFrame() {
         frame = new JFrame("Running Log");
         windowContent.setBorder(new EmptyBorder(13, 13, 13, 13));
         frame.setContentPane(windowContent);
@@ -126,8 +114,42 @@ public class MainAppWindow {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
+    // EFFECTS: sets the windowContent panel by adding northPanel, scrollPane and southPanel to North, Center
+    //          and South regions of the panel respectively
+    private void addPanelstoWindow() {
+        windowContent.add(northPanel, BorderLayout.NORTH);
+        windowContent.add(scrollPane, BorderLayout.CENTER);
+        windowContent.add(southPanel, BorderLayout.SOUTH);
+    }
+
+    // EFFECTS: sets up the northPanel, centerPanel, southPanel by adding different buttons and labels to each panel
+    private void addAllButtonstoPanels() {
+        northPanel.add(buttonLoad);
+        northPanel.add(buttonShowAllEntries);
+        northPanel.add(labelAllEntry);
+        centerPanel.add(scrollPane);
+        southPanel.add(selectionLabel);
+        southPanel.add(monthSelection);
+        southPanel.add(buttonDisplay);
+        southPanel.add(buttonProgress);
+        southPanel.add(buttonAddEntry);
+        southPanel.add(buttonSaveAll);
+    }
+
+    // EFFECTS: initialize all the buttons
+    private void initializeAllButtons() {
+        initializeLoadButton();
+        initializeShowAllEntriesButton();
+        initializeDisplayButton();
+        initializeMonthSelectionBox();
+        initializeProgressButton();
+        initializeEntryButton();
+        initializeButtonSaveAll();
+    }
+
+    // EFFECTS: initialize the save all button and displays a dialog showing a confirmation message when button clicked
     private void initializeButtonSaveAll() {
-        buttonSaveAll= new JButton("SaveAll");
+        buttonSaveAll = new JButton("SaveAll");
         buttonSaveAll.setPreferredSize(new Dimension(80, 40));
         buttonSaveAll.addActionListener(actionEvent -> {
             saveRunningLog(runningLog);

@@ -24,8 +24,8 @@ public class DateTest {
 
     @Test
     void testToString() {
-        assertEquals("14/JUNE/1999", testDate.toString());
-        assertEquals("04/MARCH/2000", testDateTwo.toString());
+        assertEquals("14/JUN/1999", testDate.toString());
+        assertEquals("04/MAR/2000", testDateTwo.toString());
 
     }
 

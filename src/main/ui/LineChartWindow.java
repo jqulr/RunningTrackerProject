@@ -39,7 +39,7 @@ public class LineChartWindow extends JFrame {
         SymbolAxis horizontalAxis = new SymbolAxis("Month", month);
         NumberAxis verticalAxis = new NumberAxis("Total Distance (km)");
         //verticalAxis.setLowerBound(0);
-        verticalAxis.setRange(0, 100);
+        verticalAxis.setRange(0, 50);
 
         XYSplineRenderer renderer = new XYSplineRenderer();
         renderer.setSeriesShapesVisible(0, false);
