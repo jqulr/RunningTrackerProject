@@ -1,5 +1,6 @@
 package model;
 
+import exception.DuplicateEntryException;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import persistence.Writable;
@@ -101,9 +102,9 @@ public class RunningLog implements Writable {
     public void addEntry(Entry entry) {
         Month month = entry.getMonth();
 
-//        if (findEntry(entry, month)) {
-//            throw new DuplicateEntryException();
-//        }
+        if (findEntry(entry, month)) {
+            throw new DuplicateEntryException();
+        }
 
         switch (month) {
             case JAN: {

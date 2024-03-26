@@ -111,8 +111,8 @@ public class JsonWriterTest {
 
             // check dates
             assertEquals("10/MAY/2024", runningLog.getMay().get(0).getDate().toString());
-            assertEquals("10/AUGUST/2024", runningLog.getAugust().get(0).getDate().toString());
-            assertEquals("11/AUGUST/2024", runningLog.getAugust().get(1).getDate().toString());
+            assertEquals("10/AUG/2024", runningLog.getAugust().get(0).getDate().toString());
+            assertEquals("11/AUG/2024", runningLog.getAugust().get(1).getDate().toString());
             assertEquals("10/NOV/2024", runningLog.getNovember().get(0).getDate().toString());
 
             // total aug distance, monthly and weekly

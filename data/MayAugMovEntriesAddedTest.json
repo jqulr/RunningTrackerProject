@@ -16,24 +16,24 @@
         "Pace": "6.00 min/km",
         "Time": 60,
         "Date": {
-            "Month": "AUGUST",
+            "Month": "AUG",
             "Year": 2024,
             "Day": 10
         },
         "Distance": 10,
-        "Notes": " AUGUST :)"
+        "Notes": " AUG :)"
     },
     {
         "Average HR": 150,
         "Pace": "4.00 min/km",
         "Time": 60,
         "Date": {
-            "Month": "AUGUST",
+            "Month": "AUG",
             "Year": 2024,
             "Day": 11
         },
         "Distance": 15,
-        "Notes": " AUGUST :)"
+        "Notes": " AUG :)"
     },
     {
         "Average HR": 150,
