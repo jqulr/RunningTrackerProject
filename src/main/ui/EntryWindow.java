@@ -77,6 +77,17 @@ public class EntryWindow {
         hrText = new JTextField(10);
         notesText = new JTextField(10);
 
+        initializeButtonSaveEntry(log);
+
+        dateChooser = new JDateChooser();
+        dateChooser.setBounds(20, 20, 200, 20);
+
+        setUpPanel();
+
+    }
+
+    // EFFECTS: initializes save entry button and displays a confirmation dialog when button clicked
+    private void initializeButtonSaveEntry(RunningLog log) {
         buttonAdd = new JButton("Save Entry");
         buttonAdd.addActionListener(actionEvent -> {
             Entry newEntry = createNewEntry();
@@ -86,10 +97,10 @@ public class EntryWindow {
             JOptionPane.showConfirmDialog(null, "Entry added successfully!",
                     "Saving Entry...", JOptionPane.PLAIN_MESSAGE);
         });
+    }
 
-        dateChooser = new JDateChooser();
-        dateChooser.setBounds(20, 20, 200, 20);
-
+    // EFFECTS: sets up the panel by adding all labels, textfields, and button
+    private void setUpPanel() {
         panel.add(dateLabel);
         panel.add(dateChooser);
         panel.add(timeLabel);
@@ -101,7 +112,6 @@ public class EntryWindow {
         panel.add(notesLabel);
         panel.add(notesText);
         panel.add(buttonAdd);
-
     }
 
     // EFFECTS: instantiates and returns a new entry based on entry information entered by the user
