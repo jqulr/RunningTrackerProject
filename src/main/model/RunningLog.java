@@ -6,6 +6,7 @@ import org.json.JSONObject;
 import persistence.Writable;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 // represents a collection of all the entries over 12 months
@@ -157,10 +158,10 @@ public class RunningLog implements Writable {
             }
         }
 
-//        Event newEvent = new Event("New entry added to running log!");
-//        EventLog log = EventLog.getInstance();
-//        log.logEvent(newEvent);
-//        printLog(log);
+        Event newEvent = new Event("New entry added to running log!");
+        EventLog log = EventLog.getInstance();
+        log.logEvent(newEvent);
+        printLog(log);
 
     }
 
@@ -240,11 +241,18 @@ public class RunningLog implements Writable {
         return jsonArray;
     }
 
-    public void printLog(EventLog log) {
-        while(log.iterator().hasNext()) {
-            System.out.println(log.iterator().next().toString());
-        }
+//    public void printLog(EventLog log) {
+//        while(log.iterator().hasNext()) {
+//            System.out.println(log.iterator().next().toString());
+//        }
+//
+//    }
 
+    public void printLog(EventLog log) {
+        Iterator<Event> iterator = log.iterator();
+        while (iterator.hasNext()) {
+            System.out.println(iterator.next().toString());
+        }
     }
 
 
