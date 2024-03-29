@@ -231,10 +231,13 @@ class RunningLogTest {
     @Test
     public void testPrintLog() {
         EventLog el = testLog.getLog();
+        el.clear();
         el.logEvent(e);
         el.logEvent(e2);
         d1 = Calendar.getInstance().getTime();
-        assertEquals( d1 + "\n" + "first event" + "\n" + d1 + "\n" + "second event" + "\n",
+        assertEquals( d1 + "\n" + "Event log cleared."
+                        + "\n" + d1 + "\n" + "first event" + "\n"
+                        + d1 + "\n" + "second event" + "\n",
                 testLog.printLog(el));
     }
 
