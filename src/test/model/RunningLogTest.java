@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -22,6 +23,11 @@ class RunningLogTest {
     private List<Month> monthList;
     private List<Date> dayList;
     private List<Entry> entryList;
+    private Event e;
+    private Event e2;
+    private java.util.Date d1;
+    private java.util.Date d2;
+    //private EventLog el;
 
 
     @BeforeEach
@@ -63,6 +69,9 @@ class RunningLogTest {
         dayList = new ArrayList<>();
 
         entryList = new ArrayList<>();
+
+        e = new Event("first event");
+        e2 = new Event("second event");
     }
 
     @Test
@@ -81,6 +90,11 @@ class RunningLogTest {
         assertEquals(testLog.getOctober(), testLog.selectMonth(Month.OCT));
         assertEquals(testLog.getNovember(), testLog.selectMonth(Month.NOV));
         assertEquals(testLog.getDecember(), testLog.selectMonth(Month.DEC));
+    }
+
+    @Test
+    public void testGetEventLog() {
+        assertEquals(testLog.getLog(), EventLog.getInstance());
     }
 
     @Test
@@ -212,6 +226,16 @@ class RunningLogTest {
         assertEquals(12, dayList.size());
         createEntries();
         assertEquals(12, entryList.size());
+    }
+
+    @Test
+    public void testPrintLog() {
+        EventLog el = testLog.getLog();
+        el.logEvent(e);
+        el.logEvent(e2);
+        d1 = Calendar.getInstance().getTime();
+        assertEquals( d1 + "\n" + "first event" + "\n" + d1 + "\n" + "second event" + "\n",
+                testLog.printLog(el));
     }
 
 }

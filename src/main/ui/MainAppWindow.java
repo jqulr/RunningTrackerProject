@@ -274,7 +274,7 @@ public class MainAppWindow {
         frame.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                runningLog.printLog(runningLog.getLog());
+                System.out.println(runningLog.printLog(runningLog.getLog()));
                 System.exit(0);
             }
 //            @Override
