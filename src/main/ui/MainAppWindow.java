@@ -5,6 +5,8 @@ import model.Entry;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.FileNotFoundException;
 import java.util.List;
 
@@ -93,6 +95,7 @@ public class MainAppWindow {
         addAllButtonstoPanels();
         addPanelstoWindow();
         setMainFrame();
+        displayEventLog();
     }
 
     // EFFECTS: sets up the main display field as a scrollable panel
@@ -111,7 +114,7 @@ public class MainAppWindow {
         frame.setContentPane(windowContent);
         frame.setSize(new Dimension(650, 650));
         frame.setVisible(true);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
     // EFFECTS: sets the windowContent panel by adding northPanel, scrollPane and southPanel to North, Center
@@ -158,25 +161,6 @@ public class MainAppWindow {
         });
     }
 
-    // TODO: MODIFIES: this?
-//    // EFFECTS: refreshes the current display window to include any newly added entries
-//    private void initializeRefreshButton() {
-//        refresh = new JButton();
-//        ImageIcon refreshIcon = new ImageIcon("refresh.png");
-//        Image resizeRefreshIcon = refreshIcon.getImage().getScaledInstance(20,20, Image.SCALE_SMOOTH);
-//        refresh.setIcon(new ImageIcon(resizeRefreshIcon));
-//        refresh.setPreferredSize(new Dimension(40, 40));
-//        refresh.addActionListener(actionEvent -> {
-//            StringBuilder stringBuilder = new StringBuilder();
-//            for (List<Entry> list : runningLog.getRunningLog()) {
-//                for (Entry e : list) {
-//                    entryToString(e, stringBuilder);
-//                }
-//            }
-//            displayField.setText(stringBuilder.toString());
-//            displayField.setCaretPosition(0);
-//        });
-//    }
 
     // MODIFIES: this
     // EFFECTS: constructs a drop-down box for all the months and sets the month to the selected month
@@ -282,6 +266,22 @@ public class MainAppWindow {
             loadRunningLog();
             JOptionPane.showMessageDialog(null, loadStatusMessage, "Loading Entries...",
                     JOptionPane.PLAIN_MESSAGE, new ImageIcon(resizedImage));
+        });
+    }
+
+    // EFFECTS: displays eventlog to console when window closed
+    private void displayEventLog() {
+        frame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                runningLog.printLog(runningLog.getLog());
+                System.exit(0);
+            }
+//            @Override
+//            public void windowClosed(WindowEvent e) {
+//                super.windowClosed(e);
+//                System.out.println("window closed");
+//            }
         });
     }
 

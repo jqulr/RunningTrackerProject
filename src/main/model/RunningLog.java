@@ -25,6 +25,11 @@ public class RunningLog implements Writable {
     private List<Entry> november = new ArrayList<>();
     private List<Entry> december = new ArrayList<>();
     private List<Entry> selectedMonth;
+    private EventLog log;
+
+    public EventLog getLog() {
+        return log;
+    }
 
     public List<List<Entry>> getRunningLog() {
         return runningLog;
@@ -159,9 +164,9 @@ public class RunningLog implements Writable {
         }
 
         Event newEvent = new Event("New entry added to running log!");
-        EventLog log = EventLog.getInstance();
+        log = EventLog.getInstance();
         log.logEvent(newEvent);
-        printLog(log);
+        //printLog(log);
 
     }
 
@@ -240,13 +245,6 @@ public class RunningLog implements Writable {
         }
         return jsonArray;
     }
-
-//    public void printLog(EventLog log) {
-//        while(log.iterator().hasNext()) {
-//            System.out.println(log.iterator().next().toString());
-//        }
-//
-//    }
 
     public void printLog(EventLog log) {
         Iterator<Event> iterator = log.iterator();

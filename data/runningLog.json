@@ -1,62 +1,26 @@
 {"Running Entries": [
     {
-        "Average HR": 1,
+        "Average HR": 12,
         "Pace": "1.00 min/km",
-        "Time": 1,
+        "Time": 12,
         "Date": {
             "Month": "MAR",
             "Year": 2024,
-            "Day": 6
+            "Day": 12
         },
-        "Distance": 1,
-        "Notes": "   1"
+        "Distance": 12,
+        "Notes": " 12"
     },
     {
-        "Average HR": 5,
+        "Average HR": 8,
         "Pace": "1.00 min/km",
-        "Time": 5,
+        "Time": 8,
         "Date": {
-            "Month": "MAR",
-            "Year": 2024,
-            "Day": 5
-        },
-        "Distance": 5,
-        "Notes": " 5"
-    },
-    {
-        "Average HR": 4,
-        "Pace": "1.00 min/km",
-        "Time": 4,
-        "Date": {
-            "Month": "MAR",
+            "Month": "AUG",
             "Year": 2024,
             "Day": 13
         },
-        "Distance": 4,
-        "Notes": " 4"
-    },
-    {
-        "Average HR": 22,
-        "Pace": "1.00 min/km",
-        "Time": 22,
-        "Date": {
-            "Month": "MAR",
-            "Year": 2024,
-            "Day": 22
-        },
-        "Distance": 22,
-        "Notes": " 22"
-    },
-    {
-        "Average HR": 2,
-        "Pace": "1.00 min/km",
-        "Time": 2,
-        "Date": {
-            "Month": "JUL",
-            "Year": 2024,
-            "Day": 15
-        },
-        "Distance": 2,
-        "Notes": "  2"
+        "Distance": 8,
+        "Notes": " 8"
     }
 ]}
