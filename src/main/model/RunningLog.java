@@ -156,6 +156,12 @@ public class RunningLog implements Writable {
                 break;
             }
         }
+
+//        Event newEvent = new Event("New entry added to running log!");
+//        EventLog log = EventLog.getInstance();
+//        log.logEvent(newEvent);
+//        printLog(log);
+
     }
 
 
@@ -233,5 +239,13 @@ public class RunningLog implements Writable {
         }
         return jsonArray;
     }
+
+    public void printLog(EventLog log) {
+        while(log.iterator().hasNext()) {
+            System.out.println(log.iterator().next().toString());
+        }
+
+    }
+
 
 }

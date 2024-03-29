@@ -16,6 +16,7 @@ import javax.swing.*;
 import java.awt.*;
 
 // class that displays a line chart for total monthly running distances across all 12 months
+// learned syntax from examples from https://github.com/jfree/jfreechart/tree/master/src/main
 public class LineChartWindow extends JFrame {
     private RunningLog log;
 
