@@ -102,8 +102,9 @@ public class RunningLog implements Writable {
 
 
     // MODIFIES: this
-    // EFFECTS: adds an entry to the month of corresponding list, or throw DuplicateEntryException if entry already
-    //         exists
+    // EFFECTS: adds an entry to the month of corresponding list, then logs entry adding event to the eventlog
+    //          or throw DuplicateEntryException if entry already
+    //          exists
     @SuppressWarnings("methodlength")
     public void addEntry(Entry entry) {
         Month month = entry.getMonth();
@@ -163,9 +164,8 @@ public class RunningLog implements Writable {
             }
         }
 
-        Event newEvent = new Event("New entry added to running log!");
+        Event newEvent = new Event("---> " + month + " entry added to running log!");
         log.logEvent(newEvent);
-        //printLog(log);
 
     }
 
@@ -245,6 +245,7 @@ public class RunningLog implements Writable {
         return jsonArray;
     }
 
+    // EFFECTS: returns a string representation of all the events in the eventlog
     public String printLog(EventLog log) {
         StringBuilder events = new StringBuilder();
         Iterator<Event> iterator = log.iterator();

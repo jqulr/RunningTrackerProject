@@ -20,8 +20,6 @@ import java.io.IOException;
 // representation of the main window displayed when user starts the application
 public class MainAppWindow {
 
-
-
     private JFrame frame;
     private JPanel windowContent;
     private JPanel northPanel;
@@ -43,8 +41,6 @@ public class MainAppWindow {
     private Month month;
     private String loadStatusMessage;
     private String saveStatusMessage;
-
-    //private StringBuilder stringBuilder = new StringBuilder();
 
 
     JsonReader jsonReader = new JsonReader(JSON_STORE);
@@ -220,7 +216,6 @@ public class MainAppWindow {
 
     }
 
-    // MODIFIES: this
     // EFFECTS: appends a string representation of the entry to the provided string
     private void entryToString(Entry e, StringBuilder string) {
         string.append(" Date: " + e.getDate() + "\n"
