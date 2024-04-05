@@ -50,7 +50,8 @@ public class RunningApp {
 
     // EFFECTS: launches the running app
     public RunningApp() {
-        runningLog = new RunningLog();
+        //runningLog = new RunningLog();
+
         runApp();
     }
 

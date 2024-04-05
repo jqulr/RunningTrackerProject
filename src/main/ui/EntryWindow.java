@@ -1,6 +1,5 @@
 package ui;
 
-import java.io.FileNotFoundException;
 import java.util.Calendar;
 import com.toedter.calendar.JDateChooser;
 import model.Date;

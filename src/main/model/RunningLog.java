@@ -1,6 +1,5 @@
 package model;
 
-import exception.DuplicateEntryException;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import persistence.Writable;
@@ -26,6 +25,9 @@ public class RunningLog implements Writable {
     private List<Entry> december = new ArrayList<>();
     private List<Entry> selectedMonth;
     private EventLog log = EventLog.getInstance();
+    private final String eventPREFIX = "  - ";
+    private String LoadingPREFIX;
+
 
     public EventLog getLog() {
         return log;
@@ -100,6 +102,18 @@ public class RunningLog implements Writable {
         runningLog.add(december);
     }
 
+//    public RunningLog(List<List<Entry>> log) {
+//        Event newEvent = new Event("testing");
+//        EventLog.getInstance().logEvent(newEvent);
+//
+//        runningLog = log;
+//    }
+
+//    public void addEntry() {
+//        addEntry(null);
+//
+//    }
+
 
     // MODIFIES: this
     // EFFECTS: adds an entry to the month of corresponding list, then logs entry adding event to the eventlog
@@ -107,11 +121,12 @@ public class RunningLog implements Writable {
     //          exists
     @SuppressWarnings("methodlength")
     public void addEntry(Entry entry) {
+
         Month month = entry.getMonth();
 
-        if (findEntry(entry, month)) {
-            throw new DuplicateEntryException();
-        }
+//        if (findEntry(entry, month)) {
+//            throw new DuplicateEntryException();
+//        }
 
         switch (month) {
             case JAN: {
@@ -164,7 +179,8 @@ public class RunningLog implements Writable {
             }
         }
 
-        Event newEvent = new Event("---> " + month + " entry added to running log!");
+
+        Event newEvent = new Event(eventPREFIX + month + " entry added to running log!");
         log.logEvent(newEvent);
 
     }
@@ -203,8 +219,12 @@ public class RunningLog implements Writable {
 
     // EFFECTS: return the list of entries corresponding to the input month
     public List<Entry> selectMonth(Month month) {
+        Event newEvent = new Event(eventPREFIX + "Viewing " + month + " entries");
+        log.logEvent(newEvent);
+
         int monthIndex = month.ordinal();
         return runningLog.get(monthIndex);
+
     }
 
     // EFFECTS: return true if an entry with matching day, month and year is found within the list of entries

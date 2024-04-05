@@ -1,9 +1,7 @@
 package persistence;
 
 
-import model.Date;
-import model.Month;
-import model.RunningLog;
+import model.*;
 
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
@@ -17,6 +15,7 @@ public class JsonWriter {
     private static final int TAB = 4;
     private String destination;
     private PrintWriter printWriter;
+    private final String eventPREFIX = "  - ";
 
 
     // EFFECTS: constructs a jsonWriter with a destination
@@ -34,6 +33,9 @@ public class JsonWriter {
     // MODIFIES: this
     // EFFECTS: writes json representation of entry object to file
     public void write(RunningLog log) {
+        Event newEvent = new Event(eventPREFIX + "Saved all entries to file");
+        EventLog.getInstance().logEvent(newEvent);
+
         JSONObject jsonObject = log.toJson();
         printWriter.print(jsonObject.toString(TAB));
     }

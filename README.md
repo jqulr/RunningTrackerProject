@@ -34,3 +34,18 @@ running progress and be able to set different goals during training.
   application to file 
 - You can reload the state of my application by clicking the "load entries" button to 
   load the state of the application from file
+
+**Phase 4: Task 2**
+
+Thu Apr 04 18:02:59 PDT 2024
+- Loaded all entries to running log
+  Thu Apr 04 18:02:59 PDT 2024
+- MAR entry added to running log!
+  Thu Apr 04 18:02:59 PDT 2024
+- APR entry added to running log!
+  Thu Apr 04 18:02:59 PDT 2024
+- APR entry added to running log!
+  Thu Apr 04 18:03:05 PDT 2024
+- Viewing MAR entries
+  Thu Apr 04 18:03:06 PDT 2024
+- Saved all entries to file

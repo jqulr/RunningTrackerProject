@@ -1,11 +1,7 @@
 package persistence;
 
 
-import exception.DuplicateEntryException;
-import model.Date;
-import model.Entry;
-import model.Month;
-import model.RunningLog;
+import model.*;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -16,6 +12,7 @@ import java.io.IOException;
 // Represents a reader that reads a JSON representation of running entries
 public class JsonReader {
     private String source;
+    private final String eventPREFIX = "  - ";
 
     // EFFECTS: constructs a reader for reading from source file
     public JsonReader(String source) {
@@ -25,6 +22,8 @@ public class JsonReader {
     // MODIFIES: rl
     // EFFECTS: reads and returns a list of entries (runninglog), throws IOException if error occurs
     public RunningLog read() throws IOException {
+        Event newEvent = new Event(eventPREFIX + "Loaded all entries to running log");
+        EventLog.getInstance().logEvent(newEvent);
 
         // use json object to store string data
         JSONObject jsonObject = new JSONObject(readSourceFile(source));
@@ -38,6 +37,7 @@ public class JsonReader {
             JSONObject entry = (JSONObject) json;
             parseEntry(rl, entry);
         }
+
         return rl;
     }
 
@@ -69,11 +69,6 @@ public class JsonReader {
 
         rl.addEntry(newEntry);
 
-//        try {
-//
-//        } catch (DuplicateEntryException e) {
-//            System.out.println("Duplicate entry not expected here");
-//        }
 
         return rl;
 
