@@ -43,8 +43,8 @@ public class RunningApp {
     private int endAt;
     private Date date;
 
-    JsonWriter jsonWriter = new JsonWriter(JSON_STORE);
-    JsonReader jsonReader = new JsonReader(JSON_STORE);
+    private JsonWriter jsonWriter = new JsonWriter(JSON_STORE);
+    private JsonReader jsonReader = new JsonReader(JSON_STORE);
 
     private static final String JSON_STORE = "./data/runningLog.json";
 
@@ -251,16 +251,7 @@ public class RunningApp {
 
     // EFFECTS: returns the Month corresponding to the input month
     public Month findMonth(String month) {
-        // reset month to null, otherwise if month not found, return value is the previously set value
-        // newMonth = null;
-//        for (Month m : Month.values()) {
-//            if (m.toString().equals(month.toUpperCase())) {
-//                newMonth = m;
-//                break;
-//            }
-//        }
 
-        // since verifyMonth already checks input, just set newMonth to the Month enum
         newMonth = Month.valueOf(month);
         return  newMonth;
 
@@ -304,12 +295,6 @@ public class RunningApp {
 
     // EFFECTS: verify month entry, or throw InvalidMonthException if month is not valid
     public void verifyMonth(String inputMonth) throws InvalidMonthException {
-//        List<String> monthInYear = new ArrayList<>(Arrays.asList("jan", "feb", "march", "april", "may", "june",
-//                                                    "july", "august", "sept", "oct", "nov", "dec"));
-
-//        if (!monthInYear.contains(inputMonth)) {
-//            throw new InvalidMonthException();
-//        }
 
         try {
             Month.valueOf(inputMonth);

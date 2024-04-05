@@ -49,3 +49,10 @@ Thu Apr 04 18:02:59 PDT 2024
 - Viewing MAR entries
   Thu Apr 04 18:03:06 PDT 2024
 - Saved all entries to file
+
+**Phase 4: Task 3**
+I would change the running log type from being represented as a list of a list of entries to a map with each 
+month as the key and a list of entries as the value for each month. This refactoring would overall improve
+readability and efficiency of this application. For instance, if I want to retrieve entries for a particular month,
+instead of iterating through the entire list, I could just retrieve them with month as the key which would be more 
+efficient once the list gets large. 

@@ -26,8 +26,6 @@ public class RunningLog implements Writable {
     private List<Entry> selectedMonth;
     private EventLog log = EventLog.getInstance();
     private final String eventPREFIX = "  - ";
-    private String LoadingPREFIX;
-
 
     public EventLog getLog() {
         return log;

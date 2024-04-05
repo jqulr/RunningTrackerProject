@@ -43,8 +43,8 @@ public class MainAppWindow {
     private String saveStatusMessage;
 
 
-    JsonReader jsonReader = new JsonReader(JSON_STORE);
-    JsonWriter jsonWriter = new JsonWriter(JSON_STORE);
+    private JsonReader jsonReader = new JsonReader(JSON_STORE);
+    private JsonWriter jsonWriter = new JsonWriter(JSON_STORE);
     private static final String JSON_STORE = "./data/runningLog.json";
 
     public RunningLog getRunningLog() {

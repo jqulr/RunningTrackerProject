@@ -26,8 +26,8 @@ public class EntryWindow {
     private JButton buttonAdd;
     private String saveStatusMessage;
 
-    JsonWriter jsonWriter = new JsonWriter(JSON_STORE);
-    private static final String JSON_STORE = "./data/runningLog.json";
+//    JsonWriter jsonWriter = new JsonWriter(JSON_STORE);
+//    private static final String JSON_STORE = "./data/runningLog.json";
 
 
     private JDateChooser dateChooser;
