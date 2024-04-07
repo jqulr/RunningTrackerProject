@@ -37,18 +37,20 @@ running progress and be able to set different goals during training.
 
 **Phase 4: Task 2**
 
-Thu Apr 04 18:02:59 PDT 2024
-- Loaded all entries to running log
-  Thu Apr 04 18:02:59 PDT 2024
-- MAR entry added to running log!
-  Thu Apr 04 18:02:59 PDT 2024
-- APR entry added to running log!
-  Thu Apr 04 18:02:59 PDT 2024
-- APR entry added to running log!
-  Thu Apr 04 18:03:05 PDT 2024
-- Viewing MAR entries
-  Thu Apr 04 18:03:06 PDT 2024
-- Saved all entries to file
+Sun Apr 07 15:18:29 PDT 2024
+  - Loaded all entries to running log
+Sun Apr 07 15:18:29 PDT 2024
+  - FEB entry added to running log!
+Sun Apr 07 15:18:29 PDT 2024
+  - MAR entry added to running log!
+Sun Apr 07 15:18:29 PDT 2024
+  - APR entry added to running log!
+Sun Apr 07 15:18:39 PDT 2024
+  - APR entry added to running log!
+Sun Apr 07 15:18:46 PDT 2024
+  - Viewed FEB entries
+Sun Apr 07 15:18:47 PDT 2024
+  - Saved all entries to file
 
 **Phase 4: Task 3**
 I would change the running log type from being represented as a list of a list of entries to a map with each 

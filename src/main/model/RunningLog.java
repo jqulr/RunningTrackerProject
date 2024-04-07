@@ -217,7 +217,7 @@ public class RunningLog implements Writable {
 
     // EFFECTS: return the list of entries corresponding to the input month
     public List<Entry> selectMonth(Month month) {
-        Event newEvent = new Event(eventPREFIX + "Viewing " + month + " entries");
+        Event newEvent = new Event(eventPREFIX + "Viewed " + month + " entries");
         log.logEvent(newEvent);
 
         int monthIndex = month.ordinal();
@@ -266,9 +266,13 @@ public class RunningLog implements Writable {
     // EFFECTS: returns a string representation of all the events in the eventlog
     public String printLog(EventLog log) {
         StringBuilder events = new StringBuilder();
-        Iterator<Event> iterator = log.iterator();
-        while (iterator.hasNext()) {
-            events.append(iterator.next().toString() + "\n");
+//        Iterator<Event> iterator = log.iterator();
+//        while (iterator.hasNext()) {
+//            events.append(iterator.next().toString() + "\n");
+//        }
+//
+        for (Event e : log) {
+            events.append(e.toString() + "\n");
         }
         return events.toString();
     }
