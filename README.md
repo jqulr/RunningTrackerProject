@@ -38,7 +38,8 @@ running progress and be able to set different goals during training.
 **Phase 4: Task 2**
 
 Sun Apr 07 15:18:29 PDT 2024
-  - Loaded all entries to running log
+  - Loaded all entries to running log  
+
 Sun Apr 07 15:18:29 PDT 2024
   - FEB entry added to running log!
 
