@@ -38,17 +38,19 @@ running progress and be able to set different goals during training.
 **Phase 4: Task 2**
 
 Sun Apr 07 23:03:50 PDT 2024
-  - FEB entry added to running log!
-Sun Apr 07 23:03:50 PDT 2024
-  - MAR entry added to running log!
-Sun Apr 07 23:03:50 PDT 2024
-  - APR entry added to running log!
-Sun Apr 07 23:03:50 PDT 2024
-  - APR entry added to running log!
-Sun Apr 07 23:04:03 PDT 2024
-  - Viewed FEB entries
+- FEB entry added to running log!
+  Sun Apr 07 23:03:50 PDT 2024
+- MAR entry added to running log!
+  Sun Apr 07 23:03:50 PDT 2024
+- APR entry added to running log!
+  Sun Apr 07 23:03:50 PDT 2024
+- APR entry added to running log!
+  Sun Apr 07 23:04:03 PDT 2024
+- Viewed FEB entries
+
 
 **Phase 4: Task 3**
+
 I would change the running log type from being represented as a list of a list of entries to a map with each 
 month as the key and a list of entries as the value for each month. This refactoring would overall improve
 readability and efficiency of this application. For instance, if I want to retrieve entries for a particular month,
