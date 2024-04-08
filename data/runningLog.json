@@ -9,7 +9,7 @@
             "Day": 5
         },
         "Distance": 1,
-        "Notes": "  1"
+        "Notes": "   1"
     },
     {
         "Average HR": 1,
@@ -21,7 +21,7 @@
             "Day": 12
         },
         "Distance": 1,
-        "Notes": "         1"
+        "Notes": "          1"
     },
     {
         "Average HR": 1,
@@ -33,7 +33,7 @@
             "Day": 1
         },
         "Distance": 1,
-        "Notes": "          1"
+        "Notes": "           1"
     },
     {
         "Average HR": 1,
@@ -45,7 +45,7 @@
             "Day": 17
         },
         "Distance": 1,
-        "Notes": "         1"
+        "Notes": "          1"
     },
     {
         "Average HR": 12,
@@ -57,6 +57,6 @@
             "Day": 2
         },
         "Distance": 12,
-        "Notes": " 12"
+        "Notes": "  12"
     }
 ]}

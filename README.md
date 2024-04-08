@@ -38,8 +38,6 @@ running progress and be able to set different goals during training.
 **Phase 4: Task 2**
 
 Sun Apr 07 15:18:29 PDT 2024
-  - Loaded all entries to running log
-Sun Apr 07 15:18:29 PDT 2024
   - FEB entry added to running log!
 Sun Apr 07 15:18:29 PDT 2024
   - MAR entry added to running log!
@@ -49,12 +47,14 @@ Sun Apr 07 15:18:39 PDT 2024
   - APR entry added to running log!
 Sun Apr 07 15:18:46 PDT 2024
   - Viewed FEB entries
-Sun Apr 07 15:18:47 PDT 2024
-  - Saved all entries to file
 
 **Phase 4: Task 3**
 I would change the running log type from being represented as a list of a list of entries to a map with each 
 month as the key and a list of entries as the value for each month. This refactoring would overall improve
 readability and efficiency of this application. For instance, if I want to retrieve entries for a particular month,
 instead of iterating through the entire list, I could just retrieve them with month as the key which would be more 
-efficient once the list gets large. 
+efficient once the list gets large. Also, currently, the RunningApp class is associated with a single month as well as 
+a list of months. The single month stores the value entered by a user and is used in multiple places,
+but the list of months is only used within a method to verify that the user has entered a valid date. 
+Since the list is only used in one place, I think it would be better to declare and instantiate the list within 
+the method so that it has local scope instead. 

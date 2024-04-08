@@ -33,8 +33,8 @@ public class JsonWriter {
     // MODIFIES: this
     // EFFECTS: writes json representation of entry object to file
     public void write(RunningLog log) {
-        Event newEvent = new Event(eventPREFIX + "Saved all entries to file");
-        EventLog.getInstance().logEvent(newEvent);
+//        Event newEvent = new Event(eventPREFIX + "Saved all entries to file");
+//        EventLog.getInstance().logEvent(newEvent);
 
         JSONObject jsonObject = log.toJson();
         printWriter.print(jsonObject.toString(TAB));

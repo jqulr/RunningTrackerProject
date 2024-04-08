@@ -22,8 +22,8 @@ public class JsonReader {
     // MODIFIES: rl
     // EFFECTS: reads and returns a list of entries (runninglog), throws IOException if error occurs
     public RunningLog read() throws IOException {
-        Event newEvent = new Event(eventPREFIX + "Loaded all entries to running log");
-        EventLog.getInstance().logEvent(newEvent);
+//        Event newEvent = new Event(eventPREFIX + "Loaded all entries to running log");
+//        EventLog.getInstance().logEvent(newEvent);
 
         // use json object to store string data
         JSONObject jsonObject = new JSONObject(readSourceFile(source));
