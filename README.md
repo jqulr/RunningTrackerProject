@@ -49,6 +49,7 @@ Sun Apr 07 23:03:50 PDT 2024
 - Viewed FEB entries
 
 
+
 **Phase 4: Task 3**
 
 I would change the running log type from being represented as a list of a list of entries to a map with each 
